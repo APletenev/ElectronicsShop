@@ -60,6 +60,7 @@ import test.es.data.service.PositionTypeLocalService;
 import test.es.data.service.PositionTypeLocalServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
+import test.es.data.service.persistence.PurchaseTypePersistence;
 
 /**
  * Provides the base implementation for the position type local service.
@@ -140,10 +141,13 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	 *
 	 * @param positionType the position type
 	 * @return the position type that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public PositionType deletePositionType(PositionType positionType) {
+	public PositionType deletePositionType(PositionType positionType)
+		throws PortalException {
+
 		return positionTypePersistence.remove(positionType);
 	}
 
@@ -587,6 +591,9 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	protected PositionTypePersistence positionTypePersistence;
 
 	@Reference
+	protected PurchaseTypePersistence purchaseTypePersistence;
+
+	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService
 		counterLocalService;
 
@@ -601,13 +608,5 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	@Reference
 	protected com.liferay.portal.kernel.service.UserLocalService
 		userLocalService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetEntryLocalService
-		assetEntryLocalService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetTagLocalService
-		assetTagLocalService;
 
 }

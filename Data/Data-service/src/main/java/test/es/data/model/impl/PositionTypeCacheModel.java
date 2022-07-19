@@ -98,8 +98,8 @@ public class PositionTypeCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", positionName=");
-		sb.append(positionName);
+		sb.append(", positionTypeName=");
+		sb.append(positionTypeName);
 		sb.append("}");
 
 		return sb.toString();
@@ -144,11 +144,11 @@ public class PositionTypeCacheModel
 			positionTypeImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (positionName == null) {
-			positionTypeImpl.setPositionName("");
+		if (positionTypeName == null) {
+			positionTypeImpl.setPositionTypeName("");
 		}
 		else {
-			positionTypeImpl.setPositionName(positionName);
+			positionTypeImpl.setPositionTypeName(positionTypeName);
 		}
 
 		positionTypeImpl.resetOriginalValues();
@@ -171,7 +171,7 @@ public class PositionTypeCacheModel
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		positionName = objectInput.readUTF();
+		positionTypeName = objectInput.readUTF();
 	}
 
 	@Override
@@ -203,11 +203,11 @@ public class PositionTypeCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		if (positionName == null) {
+		if (positionTypeName == null) {
 			objectOutput.writeUTF("");
 		}
 		else {
-			objectOutput.writeUTF(positionName);
+			objectOutput.writeUTF(positionTypeName);
 		}
 	}
 
@@ -220,6 +220,6 @@ public class PositionTypeCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String positionName;
+	public String positionTypeName;
 
 }

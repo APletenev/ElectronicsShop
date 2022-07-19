@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -63,6 +64,9 @@ public interface PositionTypeLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>test.es.data.service.impl.PositionTypeLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the position type local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link PositionTypeLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public PositionType addPositionType(
+			long userId, String positionTypeName, ServiceContext serviceContext)
+		throws PortalException;
 
 	/**
 	 * Adds the position type to the database. Also notifies the appropriate model listeners.
@@ -123,9 +127,11 @@ public interface PositionTypeLocalService
 	 *
 	 * @param positionType the position type
 	 * @return the position type that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public PositionType deletePositionType(PositionType positionType);
+	public PositionType deletePositionType(PositionType positionType)
+		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public DynamicQuery dynamicQuery();
@@ -255,6 +261,9 @@ public interface PositionTypeLocalService
 			String uuid, long groupId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getPositionTypeCount(long groupId);
+
 	/**
 	 * Returns a range of all the position types.
 	 *
@@ -268,6 +277,17 @@ public interface PositionTypeLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<PositionType> getPositionTypes(int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<PositionType> getPositionTypes(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<PositionType> getPositionTypes(
+		long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<PositionType> getPositionTypes(
+		long groupId, int start, int end, OrderByComparator<PositionType> obc);
 
 	/**
 	 * Returns all the position types matching the UUID and company.
@@ -302,6 +322,11 @@ public interface PositionTypeLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPositionTypesCount();
+
+	public PositionType updatePositionType(
+			long userId, long positionTypeID, String positionTypeName,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 	/**
 	 * Updates the position type in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -21,7 +21,20 @@ create table ES_PositionType (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	positionName VARCHAR(100) null
+	positionTypeName VARCHAR(100) null
+);
+
+create table ES_PurchaseType (
+	mvccVersion LONG default 0 not null,
+	uuid_ VARCHAR(75) null,
+	purchaseTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	purchaseTypeName VARCHAR(100) null
 );
 
 create table ElectroType1 (

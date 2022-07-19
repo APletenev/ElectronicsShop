@@ -82,7 +82,7 @@ public class PositionTypeModelImpl
 		{"positionId", Types.BIGINT}, {"groupId", Types.BIGINT},
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"positionName", Types.VARCHAR}
+		{"modifiedDate", Types.TIMESTAMP}, {"positionTypeName", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -98,19 +98,19 @@ public class PositionTypeModelImpl
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("positionName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("positionTypeName", Types.VARCHAR);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table ES_PositionType (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,positionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,positionName VARCHAR(100) null)";
+		"create table ES_PositionType (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,positionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,positionTypeName VARCHAR(100) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table ES_PositionType";
 
 	public static final String ORDER_BY_JPQL =
-		" ORDER BY positionType.positionName ASC";
+		" ORDER BY positionType.positionTypeName ASC";
 
 	public static final String ORDER_BY_SQL =
-		" ORDER BY ES_PositionType.positionName ASC";
+		" ORDER BY ES_PositionType.positionTypeName ASC";
 
 	public static final String DATA_SOURCE = "liferayDataSource";
 
@@ -141,7 +141,7 @@ public class PositionTypeModelImpl
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long POSITIONNAME_COLUMN_BITMASK = 8L;
+	public static final long POSITIONTYPENAME_COLUMN_BITMASK = 8L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
@@ -181,7 +181,7 @@ public class PositionTypeModelImpl
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setPositionName(soapModel.getPositionName());
+		model.setPositionTypeName(soapModel.getPositionTypeName());
 
 		return model;
 	}
@@ -370,10 +370,11 @@ public class PositionTypeModelImpl
 			"modifiedDate",
 			(BiConsumer<PositionType, Date>)PositionType::setModifiedDate);
 		attributeGetterFunctions.put(
-			"positionName", PositionType::getPositionName);
+			"positionTypeName", PositionType::getPositionTypeName);
 		attributeSetterBiConsumers.put(
-			"positionName",
-			(BiConsumer<PositionType, String>)PositionType::setPositionName);
+			"positionTypeName",
+			(BiConsumer<PositionType, String>)
+				PositionType::setPositionTypeName);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -578,22 +579,22 @@ public class PositionTypeModelImpl
 
 	@JSON
 	@Override
-	public String getPositionName() {
-		if (_positionName == null) {
+	public String getPositionTypeName() {
+		if (_positionTypeName == null) {
 			return "";
 		}
 		else {
-			return _positionName;
+			return _positionTypeName;
 		}
 	}
 
 	@Override
-	public void setPositionName(String positionName) {
+	public void setPositionTypeName(String positionTypeName) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
 
-		_positionName = positionName;
+		_positionTypeName = positionTypeName;
 	}
 
 	@Override
@@ -667,7 +668,7 @@ public class PositionTypeModelImpl
 		positionTypeImpl.setUserName(getUserName());
 		positionTypeImpl.setCreateDate(getCreateDate());
 		positionTypeImpl.setModifiedDate(getModifiedDate());
-		positionTypeImpl.setPositionName(getPositionName());
+		positionTypeImpl.setPositionTypeName(getPositionTypeName());
 
 		positionTypeImpl.resetOriginalValues();
 
@@ -678,7 +679,8 @@ public class PositionTypeModelImpl
 	public int compareTo(PositionType positionType) {
 		int value = 0;
 
-		value = getPositionName().compareTo(positionType.getPositionName());
+		value = getPositionTypeName().compareTo(
+			positionType.getPositionTypeName());
 
 		if (value != 0) {
 			return value;
@@ -790,12 +792,12 @@ public class PositionTypeModelImpl
 			positionTypeCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		positionTypeCacheModel.positionName = getPositionName();
+		positionTypeCacheModel.positionTypeName = getPositionTypeName();
 
-		String positionName = positionTypeCacheModel.positionName;
+		String positionTypeName = positionTypeCacheModel.positionTypeName;
 
-		if ((positionName != null) && (positionName.length() == 0)) {
-			positionTypeCacheModel.positionName = null;
+		if ((positionTypeName != null) && (positionTypeName.length() == 0)) {
+			positionTypeCacheModel.positionTypeName = null;
 		}
 
 		return positionTypeCacheModel;
@@ -898,7 +900,7 @@ public class PositionTypeModelImpl
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private String _positionName;
+	private String _positionTypeName;
 
 	public <T> T getColumnValue(String columnName) {
 		columnName = _attributeNames.getOrDefault(columnName, columnName);
@@ -938,7 +940,7 @@ public class PositionTypeModelImpl
 		_columnOriginalValues.put("userName", _userName);
 		_columnOriginalValues.put("createDate", _createDate);
 		_columnOriginalValues.put("modifiedDate", _modifiedDate);
-		_columnOriginalValues.put("positionName", _positionName);
+		_columnOriginalValues.put("positionTypeName", _positionTypeName);
 	}
 
 	private static final Map<String, String> _attributeNames;
@@ -980,7 +982,7 @@ public class PositionTypeModelImpl
 
 		columnBitmasks.put("modifiedDate", 256L);
 
-		columnBitmasks.put("positionName", 512L);
+		columnBitmasks.put("positionTypeName", 512L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

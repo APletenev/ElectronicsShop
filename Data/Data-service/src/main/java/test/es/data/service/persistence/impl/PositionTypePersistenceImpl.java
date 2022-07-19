@@ -2812,7 +2812,7 @@ public class PositionTypePersistenceImpl
 			long orderByColumnsBitmask = 0;
 
 			orderByColumnsBitmask |= PositionTypeModelImpl.getColumnBitmask(
-				"positionName");
+				"positionTypeName");
 
 			_ORDER_BY_COLUMNS_BITMASK = orderByColumnsBitmask;
 		}

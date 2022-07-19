@@ -222,18 +222,18 @@ public interface PositionTypeModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the position name of this position type.
+	 * Returns the position type name of this position type.
 	 *
-	 * @return the position name of this position type
+	 * @return the position type name of this position type
 	 */
 	@AutoEscape
-	public String getPositionName();
+	public String getPositionTypeName();
 
 	/**
-	 * Sets the position name of this position type.
+	 * Sets the position type name of this position type.
 	 *
-	 * @param positionName the position name of this position type
+	 * @param positionTypeName the position type name of this position type
 	 */
-	public void setPositionName(String positionName);
+	public void setPositionTypeName(String positionTypeName);
 
 }

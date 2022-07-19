@@ -36,6 +36,7 @@ import test.es.data.service.ElectroTypeService;
 import test.es.data.service.ElectroTypeServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
+import test.es.data.service.persistence.PurchaseTypePersistence;
 
 /**
  * Provides the base implementation for the electro type remote service.
@@ -143,6 +144,9 @@ public abstract class ElectroTypeServiceBaseImpl
 
 	@Reference
 	protected PositionTypePersistence positionTypePersistence;
+
+	@Reference
+	protected PurchaseTypePersistence purchaseTypePersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

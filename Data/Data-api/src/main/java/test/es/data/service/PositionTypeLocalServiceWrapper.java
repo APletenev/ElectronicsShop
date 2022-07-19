@@ -33,6 +33,16 @@ public class PositionTypeLocalServiceWrapper
 		_positionTypeLocalService = positionTypeLocalService;
 	}
 
+	@Override
+	public test.es.data.model.PositionType addPositionType(
+			long userId, String positionTypeName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _positionTypeLocalService.addPositionType(
+			userId, positionTypeName, serviceContext);
+	}
+
 	/**
 	 * Adds the position type to the database. Also notifies the appropriate model listeners.
 	 *
@@ -110,10 +120,12 @@ public class PositionTypeLocalServiceWrapper
 	 *
 	 * @param positionType the position type
 	 * @return the position type that was removed
+	 * @throws PortalException
 	 */
 	@Override
 	public test.es.data.model.PositionType deletePositionType(
-		test.es.data.model.PositionType positionType) {
+			test.es.data.model.PositionType positionType)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _positionTypeLocalService.deletePositionType(positionType);
 	}
@@ -304,6 +316,11 @@ public class PositionTypeLocalServiceWrapper
 			uuid, groupId);
 	}
 
+	@Override
+	public int getPositionTypeCount(long groupId) {
+		return _positionTypeLocalService.getPositionTypeCount(groupId);
+	}
+
 	/**
 	 * Returns a range of all the position types.
 	 *
@@ -320,6 +337,30 @@ public class PositionTypeLocalServiceWrapper
 		int start, int end) {
 
 		return _positionTypeLocalService.getPositionTypes(start, end);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.PositionType> getPositionTypes(
+		long groupId) {
+
+		return _positionTypeLocalService.getPositionTypes(groupId);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.PositionType> getPositionTypes(
+		long groupId, int start, int end) {
+
+		return _positionTypeLocalService.getPositionTypes(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.PositionType> getPositionTypes(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<test.es.data.model.PositionType> obc) {
+
+		return _positionTypeLocalService.getPositionTypes(
+			groupId, start, end, obc);
 	}
 
 	/**
@@ -366,6 +407,17 @@ public class PositionTypeLocalServiceWrapper
 	@Override
 	public int getPositionTypesCount() {
 		return _positionTypeLocalService.getPositionTypesCount();
+	}
+
+	@Override
+	public test.es.data.model.PositionType updatePositionType(
+			long userId, long positionTypeID, String positionTypeName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		return _positionTypeLocalService.updatePositionType(
+			userId, positionTypeID, positionTypeName, serviceContext);
 	}
 
 	/**

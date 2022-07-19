@@ -36,6 +36,7 @@ import test.es.data.service.PositionTypeService;
 import test.es.data.service.PositionTypeServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
+import test.es.data.service.persistence.PurchaseTypePersistence;
 
 /**
  * Provides the base implementation for the position type remote service.
@@ -147,6 +148,9 @@ public abstract class PositionTypeServiceBaseImpl
 	protected PositionTypePersistence positionTypePersistence;
 
 	@Reference
+	protected PurchaseTypePersistence purchaseTypePersistence;
+
+	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService
 		counterLocalService;
 
@@ -168,20 +172,5 @@ public abstract class PositionTypeServiceBaseImpl
 
 	@Reference
 	protected com.liferay.portal.kernel.service.UserService userService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetEntryLocalService
-		assetEntryLocalService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetEntryService
-		assetEntryService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetTagLocalService
-		assetTagLocalService;
-
-	@Reference
-	protected com.liferay.asset.kernel.service.AssetTagService assetTagService;
 
 }

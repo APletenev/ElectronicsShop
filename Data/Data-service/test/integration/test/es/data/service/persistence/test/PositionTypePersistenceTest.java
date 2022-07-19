@@ -141,7 +141,7 @@ public class PositionTypePersistenceTest {
 
 		newPositionType.setModifiedDate(RandomTestUtil.nextDate());
 
-		newPositionType.setPositionName(RandomTestUtil.randomString());
+		newPositionType.setPositionTypeName(RandomTestUtil.randomString());
 
 		_positionTypes.add(_persistence.update(newPositionType));
 
@@ -172,8 +172,8 @@ public class PositionTypePersistenceTest {
 			Time.getShortTimestamp(existingPositionType.getModifiedDate()),
 			Time.getShortTimestamp(newPositionType.getModifiedDate()));
 		Assert.assertEquals(
-			existingPositionType.getPositionName(),
-			newPositionType.getPositionName());
+			existingPositionType.getPositionTypeName(),
+			newPositionType.getPositionTypeName());
 	}
 
 	@Test
@@ -238,7 +238,7 @@ public class PositionTypePersistenceTest {
 			"ES_PositionType", "mvccVersion", true, "uuid", true, "positionId",
 			true, "groupId", true, "companyId", true, "userId", true,
 			"userName", true, "createDate", true, "modifiedDate", true,
-			"positionName", true);
+			"positionTypeName", true);
 	}
 
 	@Test
@@ -538,7 +538,7 @@ public class PositionTypePersistenceTest {
 
 		positionType.setModifiedDate(RandomTestUtil.nextDate());
 
-		positionType.setPositionName(RandomTestUtil.randomString());
+		positionType.setPositionTypeName(RandomTestUtil.randomString());
 
 		_positionTypes.add(_persistence.update(positionType));
 

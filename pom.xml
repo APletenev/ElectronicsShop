@@ -11,6 +11,8 @@
     <module>themes</module>
     <module>Data</module>
     <module>electrotype-web</module>
+    <module>positiontype-web</module>
+    <module>purchasetype-web</module>
   </modules>
   <properties>
     <liferay.repository.url>https://repository-cdn.liferay.com/nexus/content/groups/public/</liferay.repository.url>

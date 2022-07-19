@@ -25,7 +25,21 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="positionName" type="String">
+		<field name="positionTypeName" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
+	<model name="test.es.data.model.PurchaseType">
+		<field name="mvccVersion" type="long" />
+		<field name="uuid" type="String" />
+		<field name="purchaseTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="purchaseTypeName" type="String">
 			<hint name="max-length">100</hint>
 		</field>
 	</model>

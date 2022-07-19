@@ -60,6 +60,7 @@ import test.es.data.service.ElectroTypeLocalService;
 import test.es.data.service.ElectroTypeLocalServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
+import test.es.data.service.persistence.PurchaseTypePersistence;
 
 /**
  * Provides the base implementation for the electro type local service.
@@ -587,6 +588,9 @@ public abstract class ElectroTypeLocalServiceBaseImpl
 
 	@Reference
 	protected PositionTypePersistence positionTypePersistence;
+
+	@Reference
+	protected PurchaseTypePersistence purchaseTypePersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

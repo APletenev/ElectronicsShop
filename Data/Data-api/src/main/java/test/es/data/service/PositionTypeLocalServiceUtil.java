@@ -16,6 +16,7 @@ package test.es.data.service;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -44,6 +45,14 @@ public class PositionTypeLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>test.es.data.service.impl.PositionTypeLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static PositionType addPositionType(
+			long userId, String positionTypeName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().addPositionType(
+			userId, positionTypeName, serviceContext);
+	}
 
 	/**
 	 * Adds the position type to the database. Also notifies the appropriate model listeners.
@@ -115,8 +124,11 @@ public class PositionTypeLocalServiceUtil {
 	 *
 	 * @param positionType the position type
 	 * @return the position type that was removed
+	 * @throws PortalException
 	 */
-	public static PositionType deletePositionType(PositionType positionType) {
+	public static PositionType deletePositionType(PositionType positionType)
+		throws PortalException {
+
 		return getService().deletePositionType(positionType);
 	}
 
@@ -281,6 +293,10 @@ public class PositionTypeLocalServiceUtil {
 		return getService().getPositionTypeByUuidAndGroupId(uuid, groupId);
 	}
 
+	public static int getPositionTypeCount(long groupId) {
+		return getService().getPositionTypeCount(groupId);
+	}
+
 	/**
 	 * Returns a range of all the position types.
 	 *
@@ -294,6 +310,22 @@ public class PositionTypeLocalServiceUtil {
 	 */
 	public static List<PositionType> getPositionTypes(int start, int end) {
 		return getService().getPositionTypes(start, end);
+	}
+
+	public static List<PositionType> getPositionTypes(long groupId) {
+		return getService().getPositionTypes(groupId);
+	}
+
+	public static List<PositionType> getPositionTypes(
+		long groupId, int start, int end) {
+
+		return getService().getPositionTypes(groupId, start, end);
+	}
+
+	public static List<PositionType> getPositionTypes(
+		long groupId, int start, int end, OrderByComparator<PositionType> obc) {
+
+		return getService().getPositionTypes(groupId, start, end, obc);
 	}
 
 	/**
@@ -334,6 +366,15 @@ public class PositionTypeLocalServiceUtil {
 	 */
 	public static int getPositionTypesCount() {
 		return getService().getPositionTypesCount();
+	}
+
+	public static PositionType updatePositionType(
+			long userId, long positionTypeID, String positionTypeName,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return getService().updatePositionType(
+			userId, positionTypeID, positionTypeName, serviceContext);
 	}
 
 	/**

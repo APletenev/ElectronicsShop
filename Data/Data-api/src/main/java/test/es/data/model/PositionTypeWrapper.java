@@ -52,7 +52,7 @@ public class PositionTypeWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("positionName", getPositionName());
+		attributes.put("positionTypeName", getPositionTypeName());
 
 		return attributes;
 	}
@@ -113,10 +113,10 @@ public class PositionTypeWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		String positionName = (String)attributes.get("positionName");
+		String positionTypeName = (String)attributes.get("positionTypeName");
 
-		if (positionName != null) {
-			setPositionName(positionName);
+		if (positionTypeName != null) {
+			setPositionTypeName(positionTypeName);
 		}
 	}
 
@@ -181,13 +181,13 @@ public class PositionTypeWrapper
 	}
 
 	/**
-	 * Returns the position name of this position type.
+	 * Returns the position type name of this position type.
 	 *
-	 * @return the position name of this position type
+	 * @return the position type name of this position type
 	 */
 	@Override
-	public String getPositionName() {
-		return model.getPositionName();
+	public String getPositionTypeName() {
+		return model.getPositionTypeName();
 	}
 
 	/**
@@ -306,13 +306,13 @@ public class PositionTypeWrapper
 	}
 
 	/**
-	 * Sets the position name of this position type.
+	 * Sets the position type name of this position type.
 	 *
-	 * @param positionName the position name of this position type
+	 * @param positionTypeName the position type name of this position type
 	 */
 	@Override
-	public void setPositionName(String positionName) {
-		model.setPositionName(positionName);
+	public void setPositionTypeName(String positionTypeName) {
+		model.setPositionTypeName(positionTypeName);
 	}
 
 	/**

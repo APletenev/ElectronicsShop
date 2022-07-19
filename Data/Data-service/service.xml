@@ -25,12 +25,12 @@
 
 		<!-- Other fields -->
 
-		<column name="positionName" type="String" />
+		<column name="positionTypeName" type="String" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="positionName" />
+			<order-column name="positionTypeName" />
 		</order>
 
 		<!-- Finder methods -->
@@ -75,7 +75,46 @@
         </finder>
         
 	</entity>
+		
+		<entity name="PurchaseType" local-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="purchaseTypeId" primary="true" type="long"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		
+		<!-- Other fields -->
+		
+        <column name="purchaseTypeName" type="String"></column>
+        
+        <!-- Order -->
+        
+        <order by="asc">
+            <order-column name="purchaseTypeName"></order-column>
+        </order>
+        
+        <!-- Finder methods -->
+        
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+        
+	</entity>
+	
     <exceptions>
         <exception>ElectroTypeName</exception>
+        <exception>PositionTypeName</exception>
+        <exception>PurchaseTypeName</exception>
     </exceptions>
 </service-builder>

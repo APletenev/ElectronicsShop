@@ -42,7 +42,7 @@ public class PositionTypeSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setPositionName(model.getPositionName());
+		soapModel.setPositionTypeName(model.getPositionTypeName());
 
 		return soapModel;
 	}
@@ -168,12 +168,12 @@ public class PositionTypeSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getPositionName() {
-		return _positionName;
+	public String getPositionTypeName() {
+		return _positionTypeName;
 	}
 
-	public void setPositionName(String positionName) {
-		_positionName = positionName;
+	public void setPositionTypeName(String positionTypeName) {
+		_positionTypeName = positionTypeName;
 	}
 
 	private long _mvccVersion;
@@ -185,6 +185,6 @@ public class PositionTypeSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _positionName;
+	private String _positionTypeName;
 
 }
