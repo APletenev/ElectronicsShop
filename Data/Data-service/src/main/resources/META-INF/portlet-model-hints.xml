@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="test.es.data.model.ElectroType">
+		<field name="mvccVersion" type="long" />
+		<field name="uuid" type="String" />
+		<field name="electroTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="electroTypeName" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
+	<model name="test.es.data.model.PositionType">
+		<field name="mvccVersion" type="long" />
+		<field name="uuid" type="String" />
+		<field name="positionId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="positionName" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+	</model>
+</model-hints>

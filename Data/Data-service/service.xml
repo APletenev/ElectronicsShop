@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.3.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_3_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="test.es.data" mvcc-enabled="true">
+    <author>Andrey Pletenev</author>
+	<namespace>ES</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="PositionType" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="positionId" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="positionName" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="positionName" />
+		</order>
+
+		<!-- Finder methods -->
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+
+		<!-- References -->
+
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+	</entity>
+	<entity name="ElectroType" local-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="electroTypeId" primary="true" type="long"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		
+		<!-- Other fields -->
+		
+        <column name="electroTypeName" type="String"></column>
+        
+        <!-- Order -->
+        
+        <order by="asc">
+            <order-column name="electroTypeName"></order-column>
+        </order>
+        
+        <!-- Finder methods -->
+        
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+        
+	</entity>
+    <exceptions>
+        <exception>ElectroTypeName</exception>
+    </exceptions>
+</service-builder>

@@ -1,0 +1,10 @@
+Bundle-Name: Data-api
+Bundle-SymbolicName: test.es.data.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	test.es.data.exception,\
+	test.es.data.model,\
+	test.es.data.service,\
+	test.es.data.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../Data-service/service.xml
