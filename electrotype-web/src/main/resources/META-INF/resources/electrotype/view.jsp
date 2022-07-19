@@ -21,7 +21,7 @@
 <liferay-ui:search-container-row
     className="ElectroType" modelVar="entry">
 
-    <liferay-ui:search-container-column-text property="electroTypeName" />
+    <liferay-ui:search-container-column-text property="electroTypeName" name="Electronics types" />
 
     
     <liferay-ui:search-container-column-jsp

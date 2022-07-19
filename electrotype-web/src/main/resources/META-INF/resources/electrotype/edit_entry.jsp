@@ -25,7 +25,10 @@ if (entryId > 0) { //Editing
 
 	<aui:fieldset>
 
-		<aui:input name="electroTypeName" />
+		<aui:input name="electroTypeName"  label="Electronics type" >
+		<aui:validator name="required" > </aui:validator>
+		</aui:input>
+        
 		<aui:input name="electroTypeId" type="hidden" />
 
 	</aui:fieldset>
