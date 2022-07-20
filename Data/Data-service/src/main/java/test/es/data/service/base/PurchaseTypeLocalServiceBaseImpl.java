@@ -59,6 +59,7 @@ import test.es.data.model.PurchaseType;
 import test.es.data.service.PurchaseTypeLocalService;
 import test.es.data.service.PurchaseTypeLocalServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
+import test.es.data.service.persistence.ElectronicsPersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
 import test.es.data.service.persistence.PurchaseTypePersistence;
 
@@ -582,6 +583,9 @@ public abstract class PurchaseTypeLocalServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected ElectronicsPersistence electronicsPersistence;
 
 	@Reference
 	protected ElectroTypePersistence electroTypePersistence;

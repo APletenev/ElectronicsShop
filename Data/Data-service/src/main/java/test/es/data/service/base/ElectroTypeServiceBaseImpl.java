@@ -35,6 +35,7 @@ import test.es.data.model.ElectroType;
 import test.es.data.service.ElectroTypeService;
 import test.es.data.service.ElectroTypeServiceUtil;
 import test.es.data.service.persistence.ElectroTypePersistence;
+import test.es.data.service.persistence.ElectronicsPersistence;
 import test.es.data.service.persistence.PositionTypePersistence;
 import test.es.data.service.persistence.PurchaseTypePersistence;
 
@@ -132,6 +133,9 @@ public abstract class ElectroTypeServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected ElectronicsPersistence electronicsPersistence;
 
 	@Reference
 	protected test.es.data.service.ElectroTypeLocalService
