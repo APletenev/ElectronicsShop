@@ -10,12 +10,15 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="electronicsName" type="String" />
+		<field name="electronicsName" type="String" >
+			<hint name="max-length">150</hint></field>
 		<field name="electronicsPrice" type="long" />
 		<field name="electronicsCount" type="int" />
 		<field name="electronicsInStock" type="Boolean" />
 		<field name="electronicsArchive" type="boolean" />
-		<field name="electronicsDescription" type="String" />
+		<field name="electronicsDescription" type="String" >
+			<hint name="max-length">5000</hint>
+			<hint name="autoSize">true</hint></field>
 		<field name="electroTypeId" type="long" />
 	</model>
 	<model name="test.es.data.model.ElectroType">
