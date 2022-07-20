@@ -154,8 +154,8 @@ public class PositionTypePersistenceTest {
 		Assert.assertEquals(
 			existingPositionType.getUuid(), newPositionType.getUuid());
 		Assert.assertEquals(
-			existingPositionType.getPositionId(),
-			newPositionType.getPositionId());
+			existingPositionType.getPositionTypeId(),
+			newPositionType.getPositionTypeId());
 		Assert.assertEquals(
 			existingPositionType.getGroupId(), newPositionType.getGroupId());
 		Assert.assertEquals(
@@ -235,10 +235,10 @@ public class PositionTypePersistenceTest {
 
 	protected OrderByComparator<PositionType> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"ES_PositionType", "mvccVersion", true, "uuid", true, "positionId",
-			true, "groupId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true,
-			"positionTypeName", true);
+			"ES_PositionType", "mvccVersion", true, "uuid", true,
+			"positionTypeId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "positionTypeName", true);
 	}
 
 	@Test
@@ -385,7 +385,7 @@ public class PositionTypePersistenceTest {
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.eq(
-				"positionId", newPositionType.getPositionId()));
+				"positionTypeId", newPositionType.getPositionTypeId()));
 
 		List<PositionType> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);
@@ -404,7 +404,7 @@ public class PositionTypePersistenceTest {
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.eq(
-				"positionId", RandomTestUtil.nextLong()));
+				"positionTypeId", RandomTestUtil.nextLong()));
 
 		List<PositionType> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);
@@ -420,21 +420,21 @@ public class PositionTypePersistenceTest {
 			PositionType.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(
-			ProjectionFactoryUtil.property("positionId"));
+			ProjectionFactoryUtil.property("positionTypeId"));
 
-		Object newPositionId = newPositionType.getPositionId();
+		Object newPositionTypeId = newPositionType.getPositionTypeId();
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.in(
-				"positionId", new Object[] {newPositionId}));
+				"positionTypeId", new Object[] {newPositionTypeId}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		Assert.assertEquals(1, result.size());
 
-		Object existingPositionId = result.get(0);
+		Object existingPositionTypeId = result.get(0);
 
-		Assert.assertEquals(existingPositionId, newPositionId);
+		Assert.assertEquals(existingPositionTypeId, newPositionTypeId);
 	}
 
 	@Test
@@ -443,11 +443,11 @@ public class PositionTypePersistenceTest {
 			PositionType.class, _dynamicQueryClassLoader);
 
 		dynamicQuery.setProjection(
-			ProjectionFactoryUtil.property("positionId"));
+			ProjectionFactoryUtil.property("positionTypeId"));
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.in(
-				"positionId", new Object[] {RandomTestUtil.nextLong()}));
+				"positionTypeId", new Object[] {RandomTestUtil.nextLong()}));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -496,7 +496,7 @@ public class PositionTypePersistenceTest {
 
 		dynamicQuery.add(
 			RestrictionsFactoryUtil.eq(
-				"positionId", newPositionType.getPositionId()));
+				"positionTypeId", newPositionType.getPositionTypeId()));
 
 		List<PositionType> result = _persistence.findWithDynamicQuery(
 			dynamicQuery);

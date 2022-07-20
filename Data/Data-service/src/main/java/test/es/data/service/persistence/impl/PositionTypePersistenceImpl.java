@@ -392,7 +392,7 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where uuid = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next position type
@@ -400,13 +400,13 @@ public class PositionTypePersistenceImpl
 	 */
 	@Override
 	public PositionType[] findByUuid_PrevAndNext(
-			long positionId, String uuid,
+			long positionTypeId, String uuid,
 			OrderByComparator<PositionType> orderByComparator)
 		throws NoSuchPositionTypeException {
 
 		uuid = Objects.toString(uuid, "");
 
-		PositionType positionType = findByPrimaryKey(positionId);
+		PositionType positionType = findByPrimaryKey(positionTypeId);
 
 		Session session = null;
 
@@ -1202,7 +1202,7 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -1211,13 +1211,13 @@ public class PositionTypePersistenceImpl
 	 */
 	@Override
 	public PositionType[] findByUuid_C_PrevAndNext(
-			long positionId, String uuid, long companyId,
+			long positionTypeId, String uuid, long companyId,
 			OrderByComparator<PositionType> orderByComparator)
 		throws NoSuchPositionTypeException {
 
 		uuid = Objects.toString(uuid, "");
 
-		PositionType positionType = findByPrimaryKey(positionId);
+		PositionType positionType = findByPrimaryKey(positionTypeId);
 
 		Session session = null;
 
@@ -1740,7 +1740,7 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where groupId = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next position type
@@ -1748,11 +1748,11 @@ public class PositionTypePersistenceImpl
 	 */
 	@Override
 	public PositionType[] findByGroupId_PrevAndNext(
-			long positionId, long groupId,
+			long positionTypeId, long groupId,
 			OrderByComparator<PositionType> orderByComparator)
 		throws NoSuchPositionTypeException {
 
-		PositionType positionType = findByPrimaryKey(positionId);
+		PositionType positionType = findByPrimaryKey(positionTypeId);
 
 		Session session = null;
 
@@ -2071,15 +2071,15 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Creates a new position type with the primary key. Does not add the position type to the database.
 	 *
-	 * @param positionId the primary key for the new position type
+	 * @param positionTypeId the primary key for the new position type
 	 * @return the new position type
 	 */
 	@Override
-	public PositionType create(long positionId) {
+	public PositionType create(long positionTypeId) {
 		PositionType positionType = new PositionTypeImpl();
 
 		positionType.setNew(true);
-		positionType.setPrimaryKey(positionId);
+		positionType.setPrimaryKey(positionTypeId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -2093,15 +2093,15 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Removes the position type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type that was removed
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
 	@Override
-	public PositionType remove(long positionId)
+	public PositionType remove(long positionTypeId)
 		throws NoSuchPositionTypeException {
 
-		return remove((Serializable)positionId);
+		return remove((Serializable)positionTypeId);
 	}
 
 	/**
@@ -2290,26 +2290,26 @@ public class PositionTypePersistenceImpl
 	/**
 	 * Returns the position type with the primary key or throws a <code>NoSuchPositionTypeException</code> if it could not be found.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
 	@Override
-	public PositionType findByPrimaryKey(long positionId)
+	public PositionType findByPrimaryKey(long positionTypeId)
 		throws NoSuchPositionTypeException {
 
-		return findByPrimaryKey((Serializable)positionId);
+		return findByPrimaryKey((Serializable)positionTypeId);
 	}
 
 	/**
 	 * Returns the position type with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type, or <code>null</code> if a position type with the primary key could not be found
 	 */
 	@Override
-	public PositionType fetchByPrimaryKey(long positionId) {
-		return fetchByPrimaryKey((Serializable)positionId);
+	public PositionType fetchByPrimaryKey(long positionTypeId) {
+		return fetchByPrimaryKey((Serializable)positionTypeId);
 	}
 
 	/**
@@ -2503,7 +2503,7 @@ public class PositionTypePersistenceImpl
 
 	@Override
 	protected String getPKDBName() {
-		return "positionId";
+		return "positionTypeId";
 	}
 
 	@Override

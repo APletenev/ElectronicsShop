@@ -45,7 +45,7 @@ public class PositionTypeWrapper
 
 		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
-		attributes.put("positionId", getPositionId());
+		attributes.put("positionTypeId", getPositionTypeId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -71,10 +71,10 @@ public class PositionTypeWrapper
 			setUuid(uuid);
 		}
 
-		Long positionId = (Long)attributes.get("positionId");
+		Long positionTypeId = (Long)attributes.get("positionTypeId");
 
-		if (positionId != null) {
-			setPositionId(positionId);
+		if (positionTypeId != null) {
+			setPositionTypeId(positionTypeId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -171,13 +171,13 @@ public class PositionTypeWrapper
 	}
 
 	/**
-	 * Returns the position ID of this position type.
+	 * Returns the position type ID of this position type.
 	 *
-	 * @return the position ID of this position type
+	 * @return the position type ID of this position type
 	 */
 	@Override
-	public long getPositionId() {
-		return model.getPositionId();
+	public long getPositionTypeId() {
+		return model.getPositionTypeId();
 	}
 
 	/**
@@ -296,13 +296,13 @@ public class PositionTypeWrapper
 	}
 
 	/**
-	 * Sets the position ID of this position type.
+	 * Sets the position type ID of this position type.
 	 *
-	 * @param positionId the position ID of this position type
+	 * @param positionTypeId the position type ID of this position type
 	 */
 	@Override
-	public void setPositionId(long positionId) {
-		model.setPositionId(positionId);
+	public void setPositionTypeId(long positionTypeId) {
+		model.setPositionTypeId(positionTypeId);
 	}
 
 	/**

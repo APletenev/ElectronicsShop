@@ -35,7 +35,7 @@ public class PositionTypeSoap implements Serializable {
 
 		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
-		soapModel.setPositionId(model.getPositionId());
+		soapModel.setPositionTypeId(model.getPositionTypeId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -89,11 +89,11 @@ public class PositionTypeSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _positionId;
+		return _positionTypeId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setPositionId(pk);
+		setPositionTypeId(pk);
 	}
 
 	public long getMvccVersion() {
@@ -112,12 +112,12 @@ public class PositionTypeSoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getPositionId() {
-		return _positionId;
+	public long getPositionTypeId() {
+		return _positionTypeId;
 	}
 
-	public void setPositionId(long positionId) {
-		_positionId = positionId;
+	public void setPositionTypeId(long positionTypeId) {
+		_positionTypeId = positionTypeId;
 	}
 
 	public long getGroupId() {
@@ -178,7 +178,7 @@ public class PositionTypeSoap implements Serializable {
 
 	private long _mvccVersion;
 	private String _uuid;
-	private long _positionId;
+	private long _positionTypeId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

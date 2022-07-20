@@ -67,6 +67,16 @@
 			<artifactId>release.portal.api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>test.es.data</groupId>
+			<artifactId>Data-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>test.es.data</groupId>
+			<artifactId>Data-service</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

@@ -18,7 +18,7 @@
 	<model name="test.es.data.model.PositionType">
 		<field name="mvccVersion" type="long" />
 		<field name="uuid" type="String" />
-		<field name="positionId" type="long" />
+		<field name="positionTypeId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

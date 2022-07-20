@@ -14,7 +14,7 @@ create table ES_ElectroType (
 create table ES_PositionType (
 	mvccVersion LONG default 0 not null,
 	uuid_ VARCHAR(75) null,
-	positionId LONG not null primary key,
+	positionTypeId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,

@@ -79,7 +79,7 @@ public class PositionTypeModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"mvccVersion", Types.BIGINT}, {"uuid_", Types.VARCHAR},
-		{"positionId", Types.BIGINT}, {"groupId", Types.BIGINT},
+		{"positionTypeId", Types.BIGINT}, {"groupId", Types.BIGINT},
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"positionTypeName", Types.VARCHAR}
@@ -91,7 +91,7 @@ public class PositionTypeModelImpl
 	static {
 		TABLE_COLUMNS_MAP.put("mvccVersion", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("positionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("positionTypeId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -102,7 +102,7 @@ public class PositionTypeModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table ES_PositionType (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,positionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,positionTypeName VARCHAR(100) null)";
+		"create table ES_PositionType (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,positionTypeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,positionTypeName VARCHAR(100) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table ES_PositionType";
 
@@ -174,7 +174,7 @@ public class PositionTypeModelImpl
 
 		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setUuid(soapModel.getUuid());
-		model.setPositionId(soapModel.getPositionId());
+		model.setPositionTypeId(soapModel.getPositionTypeId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -214,17 +214,17 @@ public class PositionTypeModelImpl
 
 	@Override
 	public long getPrimaryKey() {
-		return _positionId;
+		return _positionTypeId;
 	}
 
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		setPositionId(primaryKey);
+		setPositionTypeId(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _positionId;
+		return _positionTypeId;
 	}
 
 	@Override
@@ -341,10 +341,11 @@ public class PositionTypeModelImpl
 		attributeGetterFunctions.put("uuid", PositionType::getUuid);
 		attributeSetterBiConsumers.put(
 			"uuid", (BiConsumer<PositionType, String>)PositionType::setUuid);
-		attributeGetterFunctions.put("positionId", PositionType::getPositionId);
+		attributeGetterFunctions.put(
+			"positionTypeId", PositionType::getPositionTypeId);
 		attributeSetterBiConsumers.put(
-			"positionId",
-			(BiConsumer<PositionType, Long>)PositionType::setPositionId);
+			"positionTypeId",
+			(BiConsumer<PositionType, Long>)PositionType::setPositionTypeId);
 		attributeGetterFunctions.put("groupId", PositionType::getGroupId);
 		attributeSetterBiConsumers.put(
 			"groupId",
@@ -428,17 +429,17 @@ public class PositionTypeModelImpl
 
 	@JSON
 	@Override
-	public long getPositionId() {
-		return _positionId;
+	public long getPositionTypeId() {
+		return _positionTypeId;
 	}
 
 	@Override
-	public void setPositionId(long positionId) {
+	public void setPositionTypeId(long positionTypeId) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
 
-		_positionId = positionId;
+		_positionTypeId = positionTypeId;
 	}
 
 	@JSON
@@ -661,7 +662,7 @@ public class PositionTypeModelImpl
 
 		positionTypeImpl.setMvccVersion(getMvccVersion());
 		positionTypeImpl.setUuid(getUuid());
-		positionTypeImpl.setPositionId(getPositionId());
+		positionTypeImpl.setPositionTypeId(getPositionTypeId());
 		positionTypeImpl.setGroupId(getGroupId());
 		positionTypeImpl.setCompanyId(getCompanyId());
 		positionTypeImpl.setUserId(getUserId());
@@ -758,7 +759,7 @@ public class PositionTypeModelImpl
 			positionTypeCacheModel.uuid = null;
 		}
 
-		positionTypeCacheModel.positionId = getPositionId();
+		positionTypeCacheModel.positionTypeId = getPositionTypeId();
 
 		positionTypeCacheModel.groupId = getGroupId();
 
@@ -892,7 +893,7 @@ public class PositionTypeModelImpl
 
 	private long _mvccVersion;
 	private String _uuid;
-	private long _positionId;
+	private long _positionTypeId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -933,7 +934,7 @@ public class PositionTypeModelImpl
 
 		_columnOriginalValues.put("mvccVersion", _mvccVersion);
 		_columnOriginalValues.put("uuid_", _uuid);
-		_columnOriginalValues.put("positionId", _positionId);
+		_columnOriginalValues.put("positionTypeId", _positionTypeId);
 		_columnOriginalValues.put("groupId", _groupId);
 		_columnOriginalValues.put("companyId", _companyId);
 		_columnOriginalValues.put("userId", _userId);
@@ -968,7 +969,7 @@ public class PositionTypeModelImpl
 
 		columnBitmasks.put("uuid_", 2L);
 
-		columnBitmasks.put("positionId", 4L);
+		columnBitmasks.put("positionTypeId", 4L);
 
 		columnBitmasks.put("groupId", 8L);
 

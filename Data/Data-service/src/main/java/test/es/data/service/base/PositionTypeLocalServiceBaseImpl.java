@@ -104,13 +104,13 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	/**
 	 * Creates a new position type with the primary key. Does not add the position type to the database.
 	 *
-	 * @param positionId the primary key for the new position type
+	 * @param positionTypeId the primary key for the new position type
 	 * @return the new position type
 	 */
 	@Override
 	@Transactional(enabled = false)
-	public PositionType createPositionType(long positionId) {
-		return positionTypePersistence.create(positionId);
+	public PositionType createPositionType(long positionTypeId) {
+		return positionTypePersistence.create(positionTypeId);
 	}
 
 	/**
@@ -120,16 +120,16 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	 * <strong>Important:</strong> Inspect PositionTypeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type that was removed
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public PositionType deletePositionType(long positionId)
+	public PositionType deletePositionType(long positionTypeId)
 		throws PortalException {
 
-		return positionTypePersistence.remove(positionId);
+		return positionTypePersistence.remove(positionTypeId);
 	}
 
 	/**
@@ -239,8 +239,8 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	}
 
 	@Override
-	public PositionType fetchPositionType(long positionId) {
-		return positionTypePersistence.fetchByPrimaryKey(positionId);
+	public PositionType fetchPositionType(long positionTypeId) {
+		return positionTypePersistence.fetchByPrimaryKey(positionTypeId);
 	}
 
 	/**
@@ -260,15 +260,15 @@ public abstract class PositionTypeLocalServiceBaseImpl
 	/**
 	 * Returns the position type with the primary key.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Override
-	public PositionType getPositionType(long positionId)
+	public PositionType getPositionType(long positionTypeId)
 		throws PortalException {
 
-		return positionTypePersistence.findByPrimaryKey(positionId);
+		return positionTypePersistence.findByPrimaryKey(positionTypeId);
 	}
 
 	@Override
@@ -280,7 +280,7 @@ public abstract class PositionTypeLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(PositionType.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("positionId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("positionTypeId");
 
 		return actionableDynamicQuery;
 	}
@@ -297,7 +297,8 @@ public abstract class PositionTypeLocalServiceBaseImpl
 		indexableActionableDynamicQuery.setClassLoader(getClassLoader());
 		indexableActionableDynamicQuery.setModelClass(PositionType.class);
 
-		indexableActionableDynamicQuery.setPrimaryKeyPropertyName("positionId");
+		indexableActionableDynamicQuery.setPrimaryKeyPropertyName(
+			"positionTypeId");
 
 		return indexableActionableDynamicQuery;
 	}
@@ -309,7 +310,7 @@ public abstract class PositionTypeLocalServiceBaseImpl
 		actionableDynamicQuery.setClassLoader(getClassLoader());
 		actionableDynamicQuery.setModelClass(PositionType.class);
 
-		actionableDynamicQuery.setPrimaryKeyPropertyName("positionId");
+		actionableDynamicQuery.setPrimaryKeyPropertyName("positionTypeId");
 	}
 
 	@Override

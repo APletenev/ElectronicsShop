@@ -74,12 +74,14 @@ public class PositionTypeLocalServiceWrapper
 	/**
 	 * Creates a new position type with the primary key. Does not add the position type to the database.
 	 *
-	 * @param positionId the primary key for the new position type
+	 * @param positionTypeId the primary key for the new position type
 	 * @return the new position type
 	 */
 	@Override
-	public test.es.data.model.PositionType createPositionType(long positionId) {
-		return _positionTypeLocalService.createPositionType(positionId);
+	public test.es.data.model.PositionType createPositionType(
+		long positionTypeId) {
+
+		return _positionTypeLocalService.createPositionType(positionTypeId);
 	}
 
 	/**
@@ -100,15 +102,16 @@ public class PositionTypeLocalServiceWrapper
 	 * <strong>Important:</strong> Inspect PositionTypeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type that was removed
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Override
-	public test.es.data.model.PositionType deletePositionType(long positionId)
+	public test.es.data.model.PositionType deletePositionType(
+			long positionTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _positionTypeLocalService.deletePositionType(positionId);
+		return _positionTypeLocalService.deletePositionType(positionTypeId);
 	}
 
 	/**
@@ -221,8 +224,10 @@ public class PositionTypeLocalServiceWrapper
 	}
 
 	@Override
-	public test.es.data.model.PositionType fetchPositionType(long positionId) {
-		return _positionTypeLocalService.fetchPositionType(positionId);
+	public test.es.data.model.PositionType fetchPositionType(
+		long positionTypeId) {
+
+		return _positionTypeLocalService.fetchPositionType(positionTypeId);
 	}
 
 	/**
@@ -288,15 +293,15 @@ public class PositionTypeLocalServiceWrapper
 	/**
 	 * Returns the position type with the primary key.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Override
-	public test.es.data.model.PositionType getPositionType(long positionId)
+	public test.es.data.model.PositionType getPositionType(long positionTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _positionTypeLocalService.getPositionType(positionId);
+		return _positionTypeLocalService.getPositionType(positionTypeId);
 	}
 
 	/**

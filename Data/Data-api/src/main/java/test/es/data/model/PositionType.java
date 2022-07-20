@@ -36,12 +36,12 @@ public interface PositionType extends PersistedModel, PositionTypeModel {
 	 *
 	 * Never modify this interface directly. Add methods to <code>test.es.data.model.impl.PositionTypeImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<PositionType, Long> POSITION_ID_ACCESSOR =
+	public static final Accessor<PositionType, Long> POSITION_TYPE_ID_ACCESSOR =
 		new Accessor<PositionType, Long>() {
 
 			@Override
 			public Long get(PositionType positionType) {
-				return positionType.getPositionId();
+				return positionType.getPositionTypeId();
 			}
 
 			@Override

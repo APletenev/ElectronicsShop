@@ -20,7 +20,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="electroTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class dynamic-update="true" name="test.es.data.model.impl.PositionTypeImpl" table="ES_PositionType">
-		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="positionId" type="long">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="positionTypeId" type="long">
 			<generator class="assigned" />
 		</id>
 		<version access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" name="mvccVersion" type="long" />

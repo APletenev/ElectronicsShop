@@ -90,11 +90,11 @@ public interface PositionTypeLocalService
 	/**
 	 * Creates a new position type with the primary key. Does not add the position type to the database.
 	 *
-	 * @param positionId the primary key for the new position type
+	 * @param positionTypeId the primary key for the new position type
 	 * @return the new position type
 	 */
 	@Transactional(enabled = false)
-	public PositionType createPositionType(long positionId);
+	public PositionType createPositionType(long positionTypeId);
 
 	/**
 	 * @throws PortalException
@@ -110,12 +110,12 @@ public interface PositionTypeLocalService
 	 * <strong>Important:</strong> Inspect PositionTypeLocalServiceImpl for overloaded versions of the method. If provided, use these entry points to the API, as the implementation logic may require the additional parameters defined there.
 	 * </p>
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type that was removed
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public PositionType deletePositionType(long positionId)
+	public PositionType deletePositionType(long positionTypeId)
 		throws PortalException;
 
 	/**
@@ -200,7 +200,7 @@ public interface PositionTypeLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PositionType fetchPositionType(long positionId);
+	public PositionType fetchPositionType(long positionTypeId);
 
 	/**
 	 * Returns the position type matching the UUID and group.
@@ -241,12 +241,13 @@ public interface PositionTypeLocalService
 	/**
 	 * Returns the position type with the primary key.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type
 	 * @throws PortalException if a position type with the primary key could not be found
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PositionType getPositionType(long positionId) throws PortalException;
+	public PositionType getPositionType(long positionTypeId)
+		throws PortalException;
 
 	/**
 	 * Returns the position type matching the UUID and group.

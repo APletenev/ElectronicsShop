@@ -50,7 +50,7 @@ public class PositionTypeCacheModel
 		PositionTypeCacheModel positionTypeCacheModel =
 			(PositionTypeCacheModel)object;
 
-		if ((positionId == positionTypeCacheModel.positionId) &&
+		if ((positionTypeId == positionTypeCacheModel.positionTypeId) &&
 			(mvccVersion == positionTypeCacheModel.mvccVersion)) {
 
 			return true;
@@ -61,7 +61,7 @@ public class PositionTypeCacheModel
 
 	@Override
 	public int hashCode() {
-		int hashCode = HashUtil.hash(0, positionId);
+		int hashCode = HashUtil.hash(0, positionTypeId);
 
 		return HashUtil.hash(hashCode, mvccVersion);
 	}
@@ -84,8 +84,8 @@ public class PositionTypeCacheModel
 		sb.append(mvccVersion);
 		sb.append(", uuid=");
 		sb.append(uuid);
-		sb.append(", positionId=");
-		sb.append(positionId);
+		sb.append(", positionTypeId=");
+		sb.append(positionTypeId);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", companyId=");
@@ -118,7 +118,7 @@ public class PositionTypeCacheModel
 			positionTypeImpl.setUuid(uuid);
 		}
 
-		positionTypeImpl.setPositionId(positionId);
+		positionTypeImpl.setPositionTypeId(positionTypeId);
 		positionTypeImpl.setGroupId(groupId);
 		positionTypeImpl.setCompanyId(companyId);
 		positionTypeImpl.setUserId(userId);
@@ -161,7 +161,7 @@ public class PositionTypeCacheModel
 		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 
-		positionId = objectInput.readLong();
+		positionTypeId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
 
@@ -185,7 +185,7 @@ public class PositionTypeCacheModel
 			objectOutput.writeUTF(uuid);
 		}
 
-		objectOutput.writeLong(positionId);
+		objectOutput.writeLong(positionTypeId);
 
 		objectOutput.writeLong(groupId);
 
@@ -213,7 +213,7 @@ public class PositionTypeCacheModel
 
 	public long mvccVersion;
 	public String uuid;
-	public long positionId;
+	public long positionTypeId;
 	public long groupId;
 	public long companyId;
 	public long userId;

@@ -9,7 +9,7 @@
 
 		<!-- PK fields -->
 
-		<column name="positionId" primary="true" type="long" />
+		<column name="positionTypeId" primary="true" type="long" />
 
 		<!-- Group instance -->
 

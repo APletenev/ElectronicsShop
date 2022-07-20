@@ -95,18 +95,18 @@ public interface PositionTypeModel
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the position ID of this position type.
+	 * Returns the position type ID of this position type.
 	 *
-	 * @return the position ID of this position type
+	 * @return the position type ID of this position type
 	 */
-	public long getPositionId();
+	public long getPositionTypeId();
 
 	/**
-	 * Sets the position ID of this position type.
+	 * Sets the position type ID of this position type.
 	 *
-	 * @param positionId the position ID of this position type
+	 * @param positionTypeId the position type ID of this position type
 	 */
-	public void setPositionId(long positionId);
+	public void setPositionTypeId(long positionTypeId);
 
 	/**
 	 * Returns the group ID of this position type.

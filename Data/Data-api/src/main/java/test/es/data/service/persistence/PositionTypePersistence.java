@@ -157,14 +157,14 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where uuid = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next position type
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
 	public PositionType[] findByUuid_PrevAndNext(
-			long positionId, String uuid,
+			long positionTypeId, String uuid,
 			com.liferay.portal.kernel.util.OrderByComparator<PositionType>
 				orderByComparator)
 		throws NoSuchPositionTypeException;
@@ -359,7 +359,7 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
@@ -367,7 +367,7 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
 	public PositionType[] findByUuid_C_PrevAndNext(
-			long positionId, String uuid, long companyId,
+			long positionTypeId, String uuid, long companyId,
 			com.liferay.portal.kernel.util.OrderByComparator<PositionType>
 				orderByComparator)
 		throws NoSuchPositionTypeException;
@@ -505,14 +505,14 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	/**
 	 * Returns the position types before and after the current position type in the ordered set where groupId = &#63;.
 	 *
-	 * @param positionId the primary key of the current position type
+	 * @param positionTypeId the primary key of the current position type
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next position type
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
 	public PositionType[] findByGroupId_PrevAndNext(
-			long positionId, long groupId,
+			long positionTypeId, long groupId,
 			com.liferay.portal.kernel.util.OrderByComparator<PositionType>
 				orderByComparator)
 		throws NoSuchPositionTypeException;
@@ -549,19 +549,19 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	/**
 	 * Creates a new position type with the primary key. Does not add the position type to the database.
 	 *
-	 * @param positionId the primary key for the new position type
+	 * @param positionTypeId the primary key for the new position type
 	 * @return the new position type
 	 */
-	public PositionType create(long positionId);
+	public PositionType create(long positionTypeId);
 
 	/**
 	 * Removes the position type with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type that was removed
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
-	public PositionType remove(long positionId)
+	public PositionType remove(long positionTypeId)
 		throws NoSuchPositionTypeException;
 
 	public PositionType updateImpl(PositionType positionType);
@@ -569,20 +569,20 @@ public interface PositionTypePersistence extends BasePersistence<PositionType> {
 	/**
 	 * Returns the position type with the primary key or throws a <code>NoSuchPositionTypeException</code> if it could not be found.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type
 	 * @throws NoSuchPositionTypeException if a position type with the primary key could not be found
 	 */
-	public PositionType findByPrimaryKey(long positionId)
+	public PositionType findByPrimaryKey(long positionTypeId)
 		throws NoSuchPositionTypeException;
 
 	/**
 	 * Returns the position type with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param positionId the primary key of the position type
+	 * @param positionTypeId the primary key of the position type
 	 * @return the position type, or <code>null</code> if a position type with the primary key could not be found
 	 */
-	public PositionType fetchByPrimaryKey(long positionId);
+	public PositionType fetchByPrimaryKey(long positionTypeId);
 
 	/**
 	 * Returns all the position types.
