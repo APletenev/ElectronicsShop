@@ -13,6 +13,7 @@
     <module>electrotype-web</module>
     <module>positiontype-web</module>
     <module>purchasetype-web</module>
+    <module>electronics-web</module>
   </modules>
   <properties>
     <liferay.repository.url>https://repository-cdn.liferay.com/nexus/content/groups/public/</liferay.repository.url>

@@ -134,7 +134,7 @@
         <column name="electroTypeId" type="long"></column>
         <column name="electronicsPrice" type="long"></column>
         <column name="electronicsCount" type="int"></column>
-        <column name="electronicsInStock" type="Boolean"></column>
+        <column name="electronicsInStock" type="boolean"></column>
         <column name="electronicsArchive" type="boolean"></column>
         <column name="electronicsDescription" type="String"></column>
         

@@ -33,7 +33,7 @@ import test.es.data.exception.ElectronicsNameException;
 import test.es.data.exception.ElectronicsPriceException;
 import test.es.data.model.Electronics;
 import test.es.data.service.base.ElectronicsLocalServiceBaseImpl;
-import test.es.data.service.base.ElectroTypeLocalServiceBaseImpl;
+
 
 /**
  * @author Andrey Pletenev
@@ -48,12 +48,12 @@ public class ElectronicsLocalServiceImpl
 	public Electronics addElectronics(
 			long userId, 
 			String electronicsName, 
+			long electroTypeId, //FK
 			long electronicsPrice, 
 			int electronicsCount, 
 			boolean electronicsInStock, 
 			boolean electronicsArchive, 
 			String electronicsDescription,
-			long electroTypeId, //FK
 			ServiceContext serviceContext) throws PortalException {
 
 		long groupId = serviceContext.getScopeGroupId();
@@ -79,13 +79,13 @@ public class ElectronicsLocalServiceImpl
 		entry.setExpandoBridgeAttributes(serviceContext);
 		
 		entry.setElectronicsName(electronicsName);
+		entry.setElectroTypeId(electroTypeId); //FK
 		entry.setElectronicsPrice(electronicsPrice);
 		entry.setElectronicsCount(electronicsCount);
 		entry.setElectronicsInStock(electronicsInStock);
 		entry.setElectronicsArchive(electronicsArchive);
 		entry.setElectronicsDescription(electronicsDescription);
-		
-		entry.setElectroTypeId(electroTypeId); //FK
+				
 
 		electronicsPersistence.update(entry);
 
@@ -97,12 +97,12 @@ public class ElectronicsLocalServiceImpl
 			long userId, 
 			long electronicsID,
 			String electronicsName, 
+			long electroTypeId, //FK
 			long electronicsPrice, 
 			int electronicsCount, 
 			boolean electronicsInStock, 
 			boolean electronicsArchive, 
 			String electronicsDescription,
-			long electroTypeId, //FK
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -119,13 +119,14 @@ public class ElectronicsLocalServiceImpl
 		entry.setUserName(user.getFullName());
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setElectronicsName(electronicsName);
+		entry.setElectroTypeId(electroTypeId); //FK
 		entry.setElectronicsPrice(electronicsPrice);
 		entry.setElectronicsCount(electronicsCount);
 		entry.setElectronicsInStock(electronicsInStock);
 		entry.setElectronicsArchive(electronicsArchive);
 		entry.setElectronicsDescription(electronicsDescription);
 		
-		entry.setElectroTypeId(electroTypeId); //FK
+		
 		
 		entry.setExpandoBridgeAttributes(serviceContext);
 

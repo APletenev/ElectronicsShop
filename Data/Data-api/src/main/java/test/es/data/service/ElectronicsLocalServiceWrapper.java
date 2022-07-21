@@ -52,17 +52,17 @@ public class ElectronicsLocalServiceWrapper
 
 	@Override
 	public test.es.data.model.Electronics addElectronics(
-			long userId, String electronicsName, long electronicsPrice,
-			int electronicsCount, boolean electronicsInStock,
-			boolean electronicsArchive, String electronicsDescription,
-			long electroTypeId,
+			long userId, String electronicsName, long electroTypeId,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _electronicsLocalService.addElectronics(
-			userId, electronicsName, electronicsPrice, electronicsCount,
-			electronicsInStock, electronicsArchive, electronicsDescription,
-			electroTypeId, serviceContext);
+			userId, electronicsName, electroTypeId, electronicsPrice,
+			electronicsCount, electronicsInStock, electronicsArchive,
+			electronicsDescription, serviceContext);
 	}
 
 	/**
@@ -436,17 +436,17 @@ public class ElectronicsLocalServiceWrapper
 	@Override
 	public test.es.data.model.Electronics updateElectronics(
 			long userId, long electronicsID, String electronicsName,
-			long electronicsPrice, int electronicsCount,
+			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
-			String electronicsDescription, long electroTypeId,
+			String electronicsDescription,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			   com.liferay.portal.kernel.exception.SystemException {
 
 		return _electronicsLocalService.updateElectronics(
-			userId, electronicsID, electronicsName, electronicsPrice,
-			electronicsCount, electronicsInStock, electronicsArchive,
-			electronicsDescription, electroTypeId, serviceContext);
+			userId, electronicsID, electronicsName, electroTypeId,
+			electronicsPrice, electronicsCount, electronicsInStock,
+			electronicsArchive, electronicsDescription, serviceContext);
 	}
 
 	@Override

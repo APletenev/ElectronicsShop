@@ -79,10 +79,10 @@ public interface ElectronicsLocalService
 	public Electronics addElectronics(Electronics electronics);
 
 	public Electronics addElectronics(
-			long userId, String electronicsName, long electronicsPrice,
-			int electronicsCount, boolean electronicsInStock,
-			boolean electronicsArchive, String electronicsDescription,
-			long electroTypeId, ServiceContext serviceContext)
+			long userId, String electronicsName, long electroTypeId,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription, ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
@@ -341,10 +341,9 @@ public interface ElectronicsLocalService
 
 	public Electronics updateElectronics(
 			long userId, long electronicsID, String electronicsName,
-			long electronicsPrice, int electronicsCount,
+			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
-			String electronicsDescription, long electroTypeId,
-			ServiceContext serviceContext)
+			String electronicsDescription, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 }

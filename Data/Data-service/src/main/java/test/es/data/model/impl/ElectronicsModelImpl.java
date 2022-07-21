@@ -196,7 +196,7 @@ public class ElectronicsModelImpl
 		model.setElectroTypeId(soapModel.getElectroTypeId());
 		model.setElectronicsPrice(soapModel.getElectronicsPrice());
 		model.setElectronicsCount(soapModel.getElectronicsCount());
-		model.setElectronicsInStock(soapModel.getElectronicsInStock());
+		model.setElectronicsInStock(soapModel.isElectronicsInStock());
 		model.setElectronicsArchive(soapModel.isElectronicsArchive());
 		model.setElectronicsDescription(soapModel.getElectronicsDescription());
 
@@ -693,12 +693,18 @@ public class ElectronicsModelImpl
 
 	@JSON
 	@Override
-	public Boolean getElectronicsInStock() {
+	public boolean getElectronicsInStock() {
+		return _electronicsInStock;
+	}
+
+	@JSON
+	@Override
+	public boolean isElectronicsInStock() {
 		return _electronicsInStock;
 	}
 
 	@Override
-	public void setElectronicsInStock(Boolean electronicsInStock) {
+	public void setElectronicsInStock(boolean electronicsInStock) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -822,7 +828,7 @@ public class ElectronicsModelImpl
 		electronicsImpl.setElectroTypeId(getElectroTypeId());
 		electronicsImpl.setElectronicsPrice(getElectronicsPrice());
 		electronicsImpl.setElectronicsCount(getElectronicsCount());
-		electronicsImpl.setElectronicsInStock(getElectronicsInStock());
+		electronicsImpl.setElectronicsInStock(isElectronicsInStock());
 		electronicsImpl.setElectronicsArchive(isElectronicsArchive());
 		electronicsImpl.setElectronicsDescription(getElectronicsDescription());
 
@@ -962,11 +968,7 @@ public class ElectronicsModelImpl
 
 		electronicsCacheModel.electronicsCount = getElectronicsCount();
 
-		Boolean electronicsInStock = getElectronicsInStock();
-
-		if (electronicsInStock != null) {
-			electronicsCacheModel.electronicsInStock = electronicsInStock;
-		}
+		electronicsCacheModel.electronicsInStock = isElectronicsInStock();
 
 		electronicsCacheModel.electronicsArchive = isElectronicsArchive();
 
@@ -1086,7 +1088,7 @@ public class ElectronicsModelImpl
 	private long _electroTypeId;
 	private long _electronicsPrice;
 	private int _electronicsCount;
-	private Boolean _electronicsInStock;
+	private boolean _electronicsInStock;
 	private boolean _electronicsArchive;
 	private String _electronicsDescription;
 

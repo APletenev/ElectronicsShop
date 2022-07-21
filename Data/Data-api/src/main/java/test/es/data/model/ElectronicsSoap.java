@@ -46,7 +46,7 @@ public class ElectronicsSoap implements Serializable {
 		soapModel.setElectroTypeId(model.getElectroTypeId());
 		soapModel.setElectronicsPrice(model.getElectronicsPrice());
 		soapModel.setElectronicsCount(model.getElectronicsCount());
-		soapModel.setElectronicsInStock(model.getElectronicsInStock());
+		soapModel.setElectronicsInStock(model.isElectronicsInStock());
 		soapModel.setElectronicsArchive(model.isElectronicsArchive());
 		soapModel.setElectronicsDescription(model.getElectronicsDescription());
 
@@ -206,11 +206,15 @@ public class ElectronicsSoap implements Serializable {
 		_electronicsCount = electronicsCount;
 	}
 
-	public Boolean getElectronicsInStock() {
+	public boolean getElectronicsInStock() {
 		return _electronicsInStock;
 	}
 
-	public void setElectronicsInStock(Boolean electronicsInStock) {
+	public boolean isElectronicsInStock() {
+		return _electronicsInStock;
+	}
+
+	public void setElectronicsInStock(boolean electronicsInStock) {
 		_electronicsInStock = electronicsInStock;
 	}
 
@@ -247,7 +251,7 @@ public class ElectronicsSoap implements Serializable {
 	private long _electroTypeId;
 	private long _electronicsPrice;
 	private int _electronicsCount;
-	private Boolean _electronicsInStock;
+	private boolean _electronicsInStock;
 	private boolean _electronicsArchive;
 	private String _electronicsDescription;
 

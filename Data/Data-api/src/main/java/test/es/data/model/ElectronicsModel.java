@@ -283,14 +283,21 @@ public interface ElectronicsModel
 	 *
 	 * @return the electronics in stock of this electronics
 	 */
-	public Boolean getElectronicsInStock();
+	public boolean getElectronicsInStock();
 
 	/**
-	 * Sets the electronics in stock of this electronics.
+	 * Returns <code>true</code> if this electronics is electronics in stock.
+	 *
+	 * @return <code>true</code> if this electronics is electronics in stock; <code>false</code> otherwise
+	 */
+	public boolean isElectronicsInStock();
+
+	/**
+	 * Sets whether this electronics is electronics in stock.
 	 *
 	 * @param electronicsInStock the electronics in stock of this electronics
 	 */
-	public void setElectronicsInStock(Boolean electronicsInStock);
+	public void setElectronicsInStock(boolean electronicsInStock);
 
 	/**
 	 * Returns the electronics archive of this electronics.

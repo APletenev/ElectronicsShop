@@ -64,7 +64,7 @@ public class PositionTypePortlet extends MVCPortlet {
 
 				PortalUtil.copyRequestParameters(request, response);
 
-				response.setRenderParameter("mvcPath", "positiontype/edit_entry.jsp");
+				response.setRenderParameter("mvcPath", "/positiontype/edit_entry.jsp");
 			}
 
 		} else {

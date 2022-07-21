@@ -149,7 +149,7 @@ public class ElectronicsPersistenceTest {
 
 		newElectronics.setElectronicsCount(RandomTestUtil.nextInt());
 
-		newElectronics.setElectronicsInStock();
+		newElectronics.setElectronicsInStock(RandomTestUtil.randomBoolean());
 
 		newElectronics.setElectronicsArchive(RandomTestUtil.randomBoolean());
 
@@ -195,8 +195,8 @@ public class ElectronicsPersistenceTest {
 			existingElectronics.getElectronicsCount(),
 			newElectronics.getElectronicsCount());
 		Assert.assertEquals(
-			existingElectronics.getElectronicsInStock(),
-			newElectronics.getElectronicsInStock());
+			existingElectronics.isElectronicsInStock(),
+			newElectronics.isElectronicsInStock());
 		Assert.assertEquals(
 			existingElectronics.isElectronicsArchive(),
 			newElectronics.isElectronicsArchive());
@@ -575,7 +575,7 @@ public class ElectronicsPersistenceTest {
 
 		electronics.setElectronicsCount(RandomTestUtil.nextInt());
 
-		electronics.setElectronicsInStock();
+		electronics.setElectronicsInStock(RandomTestUtil.randomBoolean());
 
 		electronics.setElectronicsArchive(RandomTestUtil.randomBoolean());
 

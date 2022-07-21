@@ -56,7 +56,7 @@ public class ElectronicsWrapper
 		attributes.put("electroTypeId", getElectroTypeId());
 		attributes.put("electronicsPrice", getElectronicsPrice());
 		attributes.put("electronicsCount", getElectronicsCount());
-		attributes.put("electronicsInStock", getElectronicsInStock());
+		attributes.put("electronicsInStock", isElectronicsInStock());
 		attributes.put("electronicsArchive", isElectronicsArchive());
 		attributes.put("electronicsDescription", getElectronicsDescription());
 
@@ -231,7 +231,7 @@ public class ElectronicsWrapper
 	 * @return the electronics in stock of this electronics
 	 */
 	@Override
-	public Boolean getElectronicsInStock() {
+	public boolean getElectronicsInStock() {
 		return model.getElectronicsInStock();
 	}
 
@@ -355,6 +355,16 @@ public class ElectronicsWrapper
 		return model.isElectronicsArchive();
 	}
 
+	/**
+	 * Returns <code>true</code> if this electronics is electronics in stock.
+	 *
+	 * @return <code>true</code> if this electronics is electronics in stock; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isElectronicsInStock() {
+		return model.isElectronicsInStock();
+	}
+
 	@Override
 	public void persist() {
 		model.persist();
@@ -421,12 +431,12 @@ public class ElectronicsWrapper
 	}
 
 	/**
-	 * Sets the electronics in stock of this electronics.
+	 * Sets whether this electronics is electronics in stock.
 	 *
 	 * @param electronicsInStock the electronics in stock of this electronics
 	 */
 	@Override
-	public void setElectronicsInStock(Boolean electronicsInStock) {
+	public void setElectronicsInStock(boolean electronicsInStock) {
 		model.setElectronicsInStock(electronicsInStock);
 	}
 

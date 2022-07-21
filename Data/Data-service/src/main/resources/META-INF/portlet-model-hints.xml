@@ -17,7 +17,7 @@
 		<field name="electroTypeId" type="long" />
 		<field name="electronicsPrice" type="long" />
 		<field name="electronicsCount" type="int" />
-		<field name="electronicsInStock" type="Boolean" />
+		<field name="electronicsInStock" type="boolean" />
 		<field name="electronicsArchive" type="boolean" />
 		<field name="electronicsDescription" type="String">
 			<hint name="max-length">5000</hint>

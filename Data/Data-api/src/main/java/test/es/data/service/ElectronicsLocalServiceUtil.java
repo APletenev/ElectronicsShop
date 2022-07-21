@@ -61,17 +61,17 @@ public class ElectronicsLocalServiceUtil {
 	}
 
 	public static Electronics addElectronics(
-			long userId, String electronicsName, long electronicsPrice,
-			int electronicsCount, boolean electronicsInStock,
-			boolean electronicsArchive, String electronicsDescription,
-			long electroTypeId,
+			long userId, String electronicsName, long electroTypeId,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws PortalException {
 
 		return getService().addElectronics(
-			userId, electronicsName, electronicsPrice, electronicsCount,
-			electronicsInStock, electronicsArchive, electronicsDescription,
-			electroTypeId, serviceContext);
+			userId, electronicsName, electroTypeId, electronicsPrice,
+			electronicsCount, electronicsInStock, electronicsArchive,
+			electronicsDescription, serviceContext);
 	}
 
 	/**
@@ -390,16 +390,16 @@ public class ElectronicsLocalServiceUtil {
 
 	public static Electronics updateElectronics(
 			long userId, long electronicsID, String electronicsName,
-			long electronicsPrice, int electronicsCount,
+			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
-			String electronicsDescription, long electroTypeId,
+			String electronicsDescription,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return getService().updateElectronics(
-			userId, electronicsID, electronicsName, electronicsPrice,
-			electronicsCount, electronicsInStock, electronicsArchive,
-			electronicsDescription, electroTypeId, serviceContext);
+			userId, electronicsID, electronicsName, electroTypeId,
+			electronicsPrice, electronicsCount, electronicsInStock,
+			electronicsArchive, electronicsDescription, serviceContext);
 	}
 
 	public static ElectronicsLocalService getService() {
