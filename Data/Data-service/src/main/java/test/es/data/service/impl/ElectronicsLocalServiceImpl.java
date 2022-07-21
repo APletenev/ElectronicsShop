@@ -152,7 +152,7 @@ public class ElectronicsLocalServiceImpl
 			return deleteElectronics(entry);
 	}
 	
-	public List<Electronics> getElectronicss(long groupId) {
+	public List<Electronics> getElectronicss(long groupId, long electroTypeId) {
 
 		return electronicsPersistence.findByGroupId(groupId);
 	}

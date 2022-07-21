@@ -325,10 +325,6 @@ public class ElectronicsLocalServiceUtil {
 		return getService().getElectronicsesCount();
 	}
 
-	public static List<Electronics> getElectronicss(long groupId) {
-		return getService().getElectronicss(groupId);
-	}
-
 	public static List<Electronics> getElectronicss(
 		long groupId, int start, int end) {
 
@@ -339,6 +335,12 @@ public class ElectronicsLocalServiceUtil {
 		long groupId, int start, int end, OrderByComparator<Electronics> obc) {
 
 		return getService().getElectronicss(groupId, start, end, obc);
+	}
+
+	public static List<Electronics> getElectronicss(
+		long groupId, long electroTypeId) {
+
+		return getService().getElectronicss(groupId, electroTypeId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery

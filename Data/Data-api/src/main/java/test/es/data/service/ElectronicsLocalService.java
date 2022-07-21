@@ -295,14 +295,14 @@ public interface ElectronicsLocalService
 	public int getElectronicsesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Electronics> getElectronicss(long groupId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Electronics> getElectronicss(long groupId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<Electronics> getElectronicss(
 		long groupId, int start, int end, OrderByComparator<Electronics> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicss(long groupId, long electroTypeId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(

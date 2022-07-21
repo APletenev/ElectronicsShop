@@ -356,13 +356,6 @@ public class ElectronicsLocalServiceWrapper
 
 	@Override
 	public java.util.List<test.es.data.model.Electronics> getElectronicss(
-		long groupId) {
-
-		return _electronicsLocalService.getElectronicss(groupId);
-	}
-
-	@Override
-	public java.util.List<test.es.data.model.Electronics> getElectronicss(
 		long groupId, int start, int end) {
 
 		return _electronicsLocalService.getElectronicss(groupId, start, end);
@@ -376,6 +369,13 @@ public class ElectronicsLocalServiceWrapper
 
 		return _electronicsLocalService.getElectronicss(
 			groupId, start, end, obc);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.Electronics> getElectronicss(
+		long groupId, long electroTypeId) {
+
+		return _electronicsLocalService.getElectronicss(groupId, electroTypeId);
 	}
 
 	@Override

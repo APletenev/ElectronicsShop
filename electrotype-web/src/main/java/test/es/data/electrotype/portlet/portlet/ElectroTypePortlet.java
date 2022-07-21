@@ -1,15 +1,20 @@
 package test.es.data.electrotype.portlet.portlet;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
+import com.liferay.adaptive.media.exception.AMRuntimeException.IOException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -96,5 +101,6 @@ public class ElectroTypePortlet extends MVCPortlet {
 			Logger.getLogger(ElectroTypePortlet.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
+	
 
 }
