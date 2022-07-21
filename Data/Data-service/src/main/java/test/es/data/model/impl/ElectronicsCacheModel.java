@@ -78,10 +78,12 @@ public class ElectronicsCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{mvccVersion=");
 		sb.append(mvccVersion);
+		sb.append(", uuid=");
+		sb.append(uuid);
 		sb.append(", electronicsId=");
 		sb.append(electronicsId);
 		sb.append(", groupId=");
@@ -98,6 +100,8 @@ public class ElectronicsCacheModel
 		sb.append(modifiedDate);
 		sb.append(", electronicsName=");
 		sb.append(electronicsName);
+		sb.append(", electroTypeId=");
+		sb.append(electroTypeId);
 		sb.append(", electronicsPrice=");
 		sb.append(electronicsPrice);
 		sb.append(", electronicsCount=");
@@ -108,8 +112,6 @@ public class ElectronicsCacheModel
 		sb.append(electronicsArchive);
 		sb.append(", electronicsDescription=");
 		sb.append(electronicsDescription);
-		sb.append(", electroTypeId=");
-		sb.append(electroTypeId);
 		sb.append("}");
 
 		return sb.toString();
@@ -120,6 +122,14 @@ public class ElectronicsCacheModel
 		ElectronicsImpl electronicsImpl = new ElectronicsImpl();
 
 		electronicsImpl.setMvccVersion(mvccVersion);
+
+		if (uuid == null) {
+			electronicsImpl.setUuid("");
+		}
+		else {
+			electronicsImpl.setUuid(uuid);
+		}
+
 		electronicsImpl.setElectronicsId(electronicsId);
 		electronicsImpl.setGroupId(groupId);
 		electronicsImpl.setCompanyId(companyId);
@@ -153,6 +163,7 @@ public class ElectronicsCacheModel
 			electronicsImpl.setElectronicsName(electronicsName);
 		}
 
+		electronicsImpl.setElectroTypeId(electroTypeId);
 		electronicsImpl.setElectronicsPrice(electronicsPrice);
 		electronicsImpl.setElectronicsCount(electronicsCount);
 		electronicsImpl.setElectronicsInStock(electronicsInStock);
@@ -165,8 +176,6 @@ public class ElectronicsCacheModel
 			electronicsImpl.setElectronicsDescription(electronicsDescription);
 		}
 
-		electronicsImpl.setElectroTypeId(electroTypeId);
-
 		electronicsImpl.resetOriginalValues();
 
 		return electronicsImpl;
@@ -175,6 +184,7 @@ public class ElectronicsCacheModel
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		mvccVersion = objectInput.readLong();
+		uuid = objectInput.readUTF();
 
 		electronicsId = objectInput.readLong();
 
@@ -188,6 +198,8 @@ public class ElectronicsCacheModel
 		modifiedDate = objectInput.readLong();
 		electronicsName = objectInput.readUTF();
 
+		electroTypeId = objectInput.readLong();
+
 		electronicsPrice = objectInput.readLong();
 
 		electronicsCount = objectInput.readInt();
@@ -196,13 +208,18 @@ public class ElectronicsCacheModel
 
 		electronicsArchive = objectInput.readBoolean();
 		electronicsDescription = objectInput.readUTF();
-
-		electroTypeId = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
 		objectOutput.writeLong(mvccVersion);
+
+		if (uuid == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(uuid);
+		}
 
 		objectOutput.writeLong(electronicsId);
 
@@ -229,6 +246,8 @@ public class ElectronicsCacheModel
 			objectOutput.writeUTF(electronicsName);
 		}
 
+		objectOutput.writeLong(electroTypeId);
+
 		objectOutput.writeLong(electronicsPrice);
 
 		objectOutput.writeInt(electronicsCount);
@@ -243,11 +262,10 @@ public class ElectronicsCacheModel
 		else {
 			objectOutput.writeUTF(electronicsDescription);
 		}
-
-		objectOutput.writeLong(electroTypeId);
 	}
 
 	public long mvccVersion;
+	public String uuid;
 	public long electronicsId;
 	public long groupId;
 	public long companyId;
@@ -256,11 +274,11 @@ public class ElectronicsCacheModel
 	public long createDate;
 	public long modifiedDate;
 	public String electronicsName;
+	public long electroTypeId;
 	public long electronicsPrice;
 	public int electronicsCount;
 	public boolean electronicsInStock;
 	public boolean electronicsArchive;
 	public String electronicsDescription;
-	public long electroTypeId;
 
 }

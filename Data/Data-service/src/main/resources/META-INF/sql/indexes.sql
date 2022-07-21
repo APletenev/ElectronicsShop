@@ -3,6 +3,8 @@ create index IX_EC0516EF on ES_ElectroType (uuid_[$COLUMN_LENGTH:75$], companyId
 create unique index IX_70748D31 on ES_ElectroType (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_899B309E on ES_Electronics (groupId);
+create index IX_BCA6F880 on ES_Electronics (uuid_[$COLUMN_LENGTH:75$], companyId);
+create unique index IX_CC939F02 on ES_Electronics (uuid_[$COLUMN_LENGTH:75$], groupId);
 
 create index IX_D4A49B10 on ES_PositionType (groupId);
 create index IX_FD492E4E on ES_PositionType (uuid_[$COLUMN_LENGTH:75$], companyId);

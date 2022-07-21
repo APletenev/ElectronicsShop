@@ -16,6 +16,7 @@ package test.es.data.service;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
@@ -59,6 +60,20 @@ public class ElectronicsLocalServiceUtil {
 		return getService().addElectronics(electronics);
 	}
 
+	public static Electronics addElectronics(
+			long userId, String electronicsName, long electronicsPrice,
+			int electronicsCount, boolean electronicsInStock,
+			boolean electronicsArchive, String electronicsDescription,
+			long electroTypeId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().addElectronics(
+			userId, electronicsName, electronicsPrice, electronicsCount,
+			electronicsInStock, electronicsArchive, electronicsDescription,
+			electroTypeId, serviceContext);
+	}
+
 	/**
 	 * Creates a new electronics with the primary key. Does not add the electronics to the database.
 	 *
@@ -88,8 +103,11 @@ public class ElectronicsLocalServiceUtil {
 	 *
 	 * @param electronics the electronics
 	 * @return the electronics that was removed
+	 * @throws PortalException
 	 */
-	public static Electronics deleteElectronics(Electronics electronics) {
+	public static Electronics deleteElectronics(Electronics electronics)
+		throws PortalException {
+
 		return getService().deleteElectronics(electronics);
 	}
 
@@ -201,6 +219,19 @@ public class ElectronicsLocalServiceUtil {
 		return getService().fetchElectronics(electronicsId);
 	}
 
+	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics, or <code>null</code> if a matching electronics could not be found
+	 */
+	public static Electronics fetchElectronicsByUuidAndGroupId(
+		String uuid, long groupId) {
+
+		return getService().fetchElectronicsByUuidAndGroupId(uuid, groupId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 
@@ -221,6 +252,25 @@ public class ElectronicsLocalServiceUtil {
 	}
 
 	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics
+	 * @throws PortalException if a matching electronics could not be found
+	 */
+	public static Electronics getElectronicsByUuidAndGroupId(
+			String uuid, long groupId)
+		throws PortalException {
+
+		return getService().getElectronicsByUuidAndGroupId(uuid, groupId);
+	}
+
+	public static int getElectronicsCount(long groupId) {
+		return getService().getElectronicsCount(groupId);
+	}
+
+	/**
 	 * Returns a range of all the electronicses.
 	 *
 	 * <p>
@@ -236,12 +286,67 @@ public class ElectronicsLocalServiceUtil {
 	}
 
 	/**
+	 * Returns all the electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @return the matching electronicses, or an empty list if no matches were found
+	 */
+	public static List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return getService().getElectronicsesByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of electronicses
+	 * @param end the upper bound of the range of electronicses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching electronicses, or an empty list if no matches were found
+	 */
+	public static List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Electronics> orderByComparator) {
+
+		return getService().getElectronicsesByUuidAndCompanyId(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
 	 * Returns the number of electronicses.
 	 *
 	 * @return the number of electronicses
 	 */
 	public static int getElectronicsesCount() {
 		return getService().getElectronicsesCount();
+	}
+
+	public static List<Electronics> getElectronicss(long groupId) {
+		return getService().getElectronicss(groupId);
+	}
+
+	public static List<Electronics> getElectronicss(
+		long groupId, int start, int end) {
+
+		return getService().getElectronicss(groupId, start, end);
+	}
+
+	public static List<Electronics> getElectronicss(
+		long groupId, int start, int end, OrderByComparator<Electronics> obc) {
+
+		return getService().getElectronicss(groupId, start, end, obc);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
+		getExportActionableDynamicQuery(
+			com.liferay.exportimport.kernel.lar.PortletDataContext
+				portletDataContext) {
+
+		return getService().getExportActionableDynamicQuery(portletDataContext);
 	}
 
 	public static
@@ -281,6 +386,20 @@ public class ElectronicsLocalServiceUtil {
 	 */
 	public static Electronics updateElectronics(Electronics electronics) {
 		return getService().updateElectronics(electronics);
+	}
+
+	public static Electronics updateElectronics(
+			long userId, long electronicsID, String electronicsName,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription, long electroTypeId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return getService().updateElectronics(
+			userId, electronicsID, electronicsName, electronicsPrice,
+			electronicsCount, electronicsInStock, electronicsArchive,
+			electronicsDescription, electroTypeId, serviceContext);
 	}
 
 	public static ElectronicsLocalService getService() {

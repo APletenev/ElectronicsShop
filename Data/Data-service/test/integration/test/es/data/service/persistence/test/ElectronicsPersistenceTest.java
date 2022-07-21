@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -125,6 +127,8 @@ public class ElectronicsPersistenceTest {
 
 		newElectronics.setMvccVersion(RandomTestUtil.nextLong());
 
+		newElectronics.setUuid(RandomTestUtil.randomString());
+
 		newElectronics.setGroupId(RandomTestUtil.nextLong());
 
 		newElectronics.setCompanyId(RandomTestUtil.nextLong());
@@ -139,6 +143,8 @@ public class ElectronicsPersistenceTest {
 
 		newElectronics.setElectronicsName(RandomTestUtil.randomString());
 
+		newElectronics.setElectroTypeId(RandomTestUtil.nextLong());
+
 		newElectronics.setElectronicsPrice(RandomTestUtil.nextLong());
 
 		newElectronics.setElectronicsCount(RandomTestUtil.nextInt());
@@ -149,8 +155,6 @@ public class ElectronicsPersistenceTest {
 
 		newElectronics.setElectronicsDescription(RandomTestUtil.randomString());
 
-		newElectronics.setElectroTypeId(RandomTestUtil.nextLong());
-
 		_electronicses.add(_persistence.update(newElectronics));
 
 		Electronics existingElectronics = _persistence.findByPrimaryKey(
@@ -159,6 +163,8 @@ public class ElectronicsPersistenceTest {
 		Assert.assertEquals(
 			existingElectronics.getMvccVersion(),
 			newElectronics.getMvccVersion());
+		Assert.assertEquals(
+			existingElectronics.getUuid(), newElectronics.getUuid());
 		Assert.assertEquals(
 			existingElectronics.getElectronicsId(),
 			newElectronics.getElectronicsId());
@@ -180,6 +186,9 @@ public class ElectronicsPersistenceTest {
 			existingElectronics.getElectronicsName(),
 			newElectronics.getElectronicsName());
 		Assert.assertEquals(
+			existingElectronics.getElectroTypeId(),
+			newElectronics.getElectroTypeId());
+		Assert.assertEquals(
 			existingElectronics.getElectronicsPrice(),
 			newElectronics.getElectronicsPrice());
 		Assert.assertEquals(
@@ -194,9 +203,33 @@ public class ElectronicsPersistenceTest {
 		Assert.assertEquals(
 			existingElectronics.getElectronicsDescription(),
 			newElectronics.getElectronicsDescription());
-		Assert.assertEquals(
-			existingElectronics.getElectroTypeId(),
-			newElectronics.getElectroTypeId());
+	}
+
+	@Test
+	public void testCountByUuid() throws Exception {
+		_persistence.countByUuid("");
+
+		_persistence.countByUuid("null");
+
+		_persistence.countByUuid((String)null);
+	}
+
+	@Test
+	public void testCountByUUID_G() throws Exception {
+		_persistence.countByUUID_G("", RandomTestUtil.nextLong());
+
+		_persistence.countByUUID_G("null", 0L);
+
+		_persistence.countByUUID_G((String)null, 0L);
+	}
+
+	@Test
+	public void testCountByUuid_C() throws Exception {
+		_persistence.countByUuid_C("", RandomTestUtil.nextLong());
+
+		_persistence.countByUuid_C("null", 0L);
+
+		_persistence.countByUuid_C((String)null, 0L);
 	}
 
 	@Test
@@ -231,12 +264,12 @@ public class ElectronicsPersistenceTest {
 
 	protected OrderByComparator<Electronics> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"ES_Electronics", "mvccVersion", true, "electronicsId", true,
-			"groupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "electronicsName",
-			true, "electronicsPrice", true, "electronicsCount", true,
-			"electronicsInStock", true, "electronicsArchive", true,
-			"electronicsDescription", true, "electroTypeId", true);
+			"ES_Electronics", "mvccVersion", true, "uuid", true,
+			"electronicsId", true, "groupId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"electronicsName", true, "electroTypeId", true, "electronicsPrice",
+			true, "electronicsCount", true, "electronicsInStock", true,
+			"electronicsArchive", true, "electronicsDescription", true);
 	}
 
 	@Test
@@ -450,12 +483,77 @@ public class ElectronicsPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		Electronics newElectronics = addElectronics();
+
+		_persistence.clearCache();
+
+		_assertOriginalValues(
+			_persistence.findByPrimaryKey(newElectronics.getPrimaryKey()));
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromDatabase()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(true);
+	}
+
+	@Test
+	public void testResetOriginalValuesWithDynamicQueryLoadFromSession()
+		throws Exception {
+
+		_testResetOriginalValuesWithDynamicQuery(false);
+	}
+
+	private void _testResetOriginalValuesWithDynamicQuery(boolean clearSession)
+		throws Exception {
+
+		Electronics newElectronics = addElectronics();
+
+		if (clearSession) {
+			Session session = _persistence.openSession();
+
+			session.flush();
+
+			session.clear();
+		}
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			Electronics.class, _dynamicQueryClassLoader);
+
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq(
+				"electronicsId", newElectronics.getElectronicsId()));
+
+		List<Electronics> result = _persistence.findWithDynamicQuery(
+			dynamicQuery);
+
+		_assertOriginalValues(result.get(0));
+	}
+
+	private void _assertOriginalValues(Electronics electronics) {
+		Assert.assertEquals(
+			electronics.getUuid(),
+			ReflectionTestUtil.invoke(
+				electronics, "getColumnOriginalValue",
+				new Class<?>[] {String.class}, "uuid_"));
+		Assert.assertEquals(
+			Long.valueOf(electronics.getGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				electronics, "getColumnOriginalValue",
+				new Class<?>[] {String.class}, "groupId"));
+	}
+
 	protected Electronics addElectronics() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		Electronics electronics = _persistence.create(pk);
 
 		electronics.setMvccVersion(RandomTestUtil.nextLong());
+
+		electronics.setUuid(RandomTestUtil.randomString());
 
 		electronics.setGroupId(RandomTestUtil.nextLong());
 
@@ -471,6 +569,8 @@ public class ElectronicsPersistenceTest {
 
 		electronics.setElectronicsName(RandomTestUtil.randomString());
 
+		electronics.setElectroTypeId(RandomTestUtil.nextLong());
+
 		electronics.setElectronicsPrice(RandomTestUtil.nextLong());
 
 		electronics.setElectronicsCount(RandomTestUtil.nextInt());
@@ -480,8 +580,6 @@ public class ElectronicsPersistenceTest {
 		electronics.setElectronicsArchive(RandomTestUtil.randomBoolean());
 
 		electronics.setElectronicsDescription(RandomTestUtil.randomString());
-
-		electronics.setElectroTypeId(RandomTestUtil.nextLong());
 
 		_electronicses.add(_persistence.update(electronics));
 

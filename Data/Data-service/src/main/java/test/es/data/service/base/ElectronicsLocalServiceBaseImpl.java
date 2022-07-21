@@ -14,6 +14,11 @@
 
 package test.es.data.service.base;
 
+import com.liferay.exportimport.kernel.lar.ExportImportHelperUtil;
+import com.liferay.exportimport.kernel.lar.ManifestSummary;
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
+import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -23,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DefaultActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -136,10 +142,13 @@ public abstract class ElectronicsLocalServiceBaseImpl
 	 *
 	 * @param electronics the electronics
 	 * @return the electronics that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Electronics deleteElectronics(Electronics electronics) {
+	public Electronics deleteElectronics(Electronics electronics)
+		throws PortalException {
+
 		return electronicsPersistence.remove(electronics);
 	}
 
@@ -236,6 +245,20 @@ public abstract class ElectronicsLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics, or <code>null</code> if a matching electronics could not be found
+	 */
+	@Override
+	public Electronics fetchElectronicsByUuidAndGroupId(
+		String uuid, long groupId) {
+
+		return electronicsPersistence.fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Returns the electronics with the primary key.
 	 *
 	 * @param electronicsId the primary key of the electronics
@@ -291,6 +314,72 @@ public abstract class ElectronicsLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("electronicsId");
 	}
 
+	@Override
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		final PortletDataContext portletDataContext) {
+
+		final ExportActionableDynamicQuery exportActionableDynamicQuery =
+			new ExportActionableDynamicQuery() {
+
+				@Override
+				public long performCount() throws PortalException {
+					ManifestSummary manifestSummary =
+						portletDataContext.getManifestSummary();
+
+					StagedModelType stagedModelType = getStagedModelType();
+
+					long modelAdditionCount = super.performCount();
+
+					manifestSummary.addModelAdditionCount(
+						stagedModelType, modelAdditionCount);
+
+					long modelDeletionCount =
+						ExportImportHelperUtil.getModelDeletionCount(
+							portletDataContext, stagedModelType);
+
+					manifestSummary.addModelDeletionCount(
+						stagedModelType, modelDeletionCount);
+
+					return modelAdditionCount;
+				}
+
+			};
+
+		initActionableDynamicQuery(exportActionableDynamicQuery);
+
+		exportActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					portletDataContext.addDateRangeCriteria(
+						dynamicQuery, "modifiedDate");
+				}
+
+			});
+
+		exportActionableDynamicQuery.setCompanyId(
+			portletDataContext.getCompanyId());
+
+		exportActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<Electronics>() {
+
+				@Override
+				public void performAction(Electronics electronics)
+					throws PortalException {
+
+					StagedModelDataHandlerUtil.exportStagedModel(
+						portletDataContext, electronics);
+				}
+
+			});
+		exportActionableDynamicQuery.setStagedModelType(
+			new StagedModelType(
+				PortalUtil.getClassNameId(Electronics.class.getName())));
+
+		return exportActionableDynamicQuery;
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -323,6 +412,54 @@ public abstract class ElectronicsLocalServiceBaseImpl
 		throws PortalException {
 
 		return electronicsPersistence.findByPrimaryKey(primaryKeyObj);
+	}
+
+	/**
+	 * Returns all the electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @return the matching electronicses, or an empty list if no matches were found
+	 */
+	@Override
+	public List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId) {
+
+		return electronicsPersistence.findByUuid_C(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of electronicses
+	 * @param end the upper bound of the range of electronicses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching electronicses, or an empty list if no matches were found
+	 */
+	@Override
+	public List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Electronics> orderByComparator) {
+
+		return electronicsPersistence.findByUuid_C(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics
+	 * @throws PortalException if a matching electronics could not be found
+	 */
+	@Override
+	public Electronics getElectronicsByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException {
+
+		return electronicsPersistence.findByUUID_G(uuid, groupId);
 	}
 
 	/**

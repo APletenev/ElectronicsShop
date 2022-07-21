@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.model.BaseModel;
 import com.liferay.portal.kernel.model.GroupedModel;
 import com.liferay.portal.kernel.model.MVCCModel;
 import com.liferay.portal.kernel.model.ShardedModel;
+import com.liferay.portal.kernel.model.StagedAuditedModel;
 
 import java.util.Date;
 
@@ -37,7 +38,8 @@ import org.osgi.annotation.versioning.ProviderType;
  */
 @ProviderType
 public interface ElectronicsModel
-	extends BaseModel<Electronics>, GroupedModel, MVCCModel, ShardedModel {
+	extends BaseModel<Electronics>, GroupedModel, MVCCModel, ShardedModel,
+			StagedAuditedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -74,6 +76,23 @@ public interface ElectronicsModel
 	 */
 	@Override
 	public void setMvccVersion(long mvccVersion);
+
+	/**
+	 * Returns the uuid of this electronics.
+	 *
+	 * @return the uuid of this electronics
+	 */
+	@AutoEscape
+	@Override
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this electronics.
+	 *
+	 * @param uuid the uuid of this electronics
+	 */
+	@Override
+	public void setUuid(String uuid);
 
 	/**
 	 * Returns the electronics ID of this electronics.
@@ -218,6 +237,20 @@ public interface ElectronicsModel
 	public void setElectronicsName(String electronicsName);
 
 	/**
+	 * Returns the electro type ID of this electronics.
+	 *
+	 * @return the electro type ID of this electronics
+	 */
+	public long getElectroTypeId();
+
+	/**
+	 * Sets the electro type ID of this electronics.
+	 *
+	 * @param electroTypeId the electro type ID of this electronics
+	 */
+	public void setElectroTypeId(long electroTypeId);
+
+	/**
 	 * Returns the electronics price of this electronics.
 	 *
 	 * @return the electronics price of this electronics
@@ -294,19 +327,5 @@ public interface ElectronicsModel
 	 * @param electronicsDescription the electronics description of this electronics
 	 */
 	public void setElectronicsDescription(String electronicsDescription);
-
-	/**
-	 * Returns the electro type ID of this electronics.
-	 *
-	 * @return the electro type ID of this electronics
-	 */
-	public long getElectroTypeId();
-
-	/**
-	 * Sets the electro type ID of this electronics.
-	 *
-	 * @param electroTypeId the electro type ID of this electronics
-	 */
-	public void setElectroTypeId(long electroTypeId);
 
 }

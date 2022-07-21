@@ -14,8 +14,10 @@
 
 package test.es.data.service;
 
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -25,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
 import com.liferay.portal.kernel.service.PersistedModelLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -75,6 +78,13 @@ public interface ElectronicsLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Electronics addElectronics(Electronics electronics);
 
+	public Electronics addElectronics(
+			long userId, String electronicsName, long electronicsPrice,
+			int electronicsCount, boolean electronicsInStock,
+			boolean electronicsArchive, String electronicsDescription,
+			long electroTypeId, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new electronics with the primary key. Does not add the electronics to the database.
 	 *
@@ -99,9 +109,11 @@ public interface ElectronicsLocalService
 	 *
 	 * @param electronics the electronics
 	 * @return the electronics that was removed
+	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.DELETE)
-	public Electronics deleteElectronics(Electronics electronics);
+	public Electronics deleteElectronics(Electronics electronics)
+		throws PortalException;
 
 	/**
 	 * Deletes the electronics with the primary key from the database. Also notifies the appropriate model listeners.
@@ -194,6 +206,17 @@ public interface ElectronicsLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Electronics fetchElectronics(long electronicsId);
 
+	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics, or <code>null</code> if a matching electronics could not be found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Electronics fetchElectronicsByUuidAndGroupId(
+		String uuid, long groupId);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -207,6 +230,21 @@ public interface ElectronicsLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Electronics getElectronics(long electronicsId)
 		throws PortalException;
+
+	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics
+	 * @throws PortalException if a matching electronics could not be found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Electronics getElectronicsByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getElectronicsCount(long groupId);
 
 	/**
 	 * Returns a range of all the electronicses.
@@ -223,12 +261,52 @@ public interface ElectronicsLocalService
 	public List<Electronics> getElectronicses(int start, int end);
 
 	/**
+	 * Returns all the electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @return the matching electronicses, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId);
+
+	/**
+	 * Returns a range of electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of electronicses
+	 * @param end the upper bound of the range of electronicses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching electronicses, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicsesByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<Electronics> orderByComparator);
+
+	/**
 	 * Returns the number of electronicses.
 	 *
 	 * @return the number of electronicses
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getElectronicsesCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicss(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicss(long groupId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Electronics> getElectronicss(
+		long groupId, int start, int end, OrderByComparator<Electronics> obc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		PortletDataContext portletDataContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
@@ -260,5 +338,13 @@ public interface ElectronicsLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Electronics updateElectronics(Electronics electronics);
+
+	public Electronics updateElectronics(
+			long userId, long electronicsID, String electronicsName,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription, long electroTypeId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 }

@@ -13,6 +13,7 @@ create table ES_ElectroType (
 
 create table ES_Electronics (
 	mvccVersion LONG default 0 not null,
+	uuid_ VARCHAR(75) null,
 	electronicsId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -20,13 +21,13 @@ create table ES_Electronics (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	electronicsName VARCHAR(75) null,
+	electronicsName VARCHAR(150) null,
+	electroTypeId LONG,
 	electronicsPrice LONG,
 	electronicsCount INTEGER,
 	electronicsInStock BOOLEAN,
 	electronicsArchive BOOLEAN,
-	electronicsDescription VARCHAR(75) null,
-	electroTypeId LONG
+	electronicsDescription TEXT null
 );
 
 create table ES_PositionType (

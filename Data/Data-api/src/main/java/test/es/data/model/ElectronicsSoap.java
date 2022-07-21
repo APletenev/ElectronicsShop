@@ -34,6 +34,7 @@ public class ElectronicsSoap implements Serializable {
 		ElectronicsSoap soapModel = new ElectronicsSoap();
 
 		soapModel.setMvccVersion(model.getMvccVersion());
+		soapModel.setUuid(model.getUuid());
 		soapModel.setElectronicsId(model.getElectronicsId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -42,12 +43,12 @@ public class ElectronicsSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setElectronicsName(model.getElectronicsName());
+		soapModel.setElectroTypeId(model.getElectroTypeId());
 		soapModel.setElectronicsPrice(model.getElectronicsPrice());
 		soapModel.setElectronicsCount(model.getElectronicsCount());
 		soapModel.setElectronicsInStock(model.getElectronicsInStock());
 		soapModel.setElectronicsArchive(model.isElectronicsArchive());
 		soapModel.setElectronicsDescription(model.getElectronicsDescription());
-		soapModel.setElectroTypeId(model.getElectroTypeId());
 
 		return soapModel;
 	}
@@ -107,6 +108,14 @@ public class ElectronicsSoap implements Serializable {
 
 	public void setMvccVersion(long mvccVersion) {
 		_mvccVersion = mvccVersion;
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getElectronicsId() {
@@ -173,6 +182,14 @@ public class ElectronicsSoap implements Serializable {
 		_electronicsName = electronicsName;
 	}
 
+	public long getElectroTypeId() {
+		return _electroTypeId;
+	}
+
+	public void setElectroTypeId(long electroTypeId) {
+		_electroTypeId = electroTypeId;
+	}
+
 	public long getElectronicsPrice() {
 		return _electronicsPrice;
 	}
@@ -217,15 +234,8 @@ public class ElectronicsSoap implements Serializable {
 		_electronicsDescription = electronicsDescription;
 	}
 
-	public long getElectroTypeId() {
-		return _electroTypeId;
-	}
-
-	public void setElectroTypeId(long electroTypeId) {
-		_electroTypeId = electroTypeId;
-	}
-
 	private long _mvccVersion;
+	private String _uuid;
 	private long _electronicsId;
 	private long _groupId;
 	private long _companyId;
@@ -234,11 +244,11 @@ public class ElectronicsSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _electronicsName;
+	private long _electroTypeId;
 	private long _electronicsPrice;
 	private int _electronicsCount;
 	private Boolean _electronicsInStock;
 	private boolean _electronicsArchive;
 	private String _electronicsDescription;
-	private long _electroTypeId;
 
 }

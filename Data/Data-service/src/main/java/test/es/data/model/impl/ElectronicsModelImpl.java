@@ -16,6 +16,7 @@ package test.es.data.model.impl;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -76,16 +78,16 @@ public class ElectronicsModelImpl
 	public static final String TABLE_NAME = "ES_Electronics";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"mvccVersion", Types.BIGINT}, {"electronicsId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
-		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
-		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
-		{"electronicsName", Types.VARCHAR}, {"electronicsPrice", Types.BIGINT},
+		{"mvccVersion", Types.BIGINT}, {"uuid_", Types.VARCHAR},
+		{"electronicsId", Types.BIGINT}, {"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"electronicsName", Types.VARCHAR},
+		{"electroTypeId", Types.BIGINT}, {"electronicsPrice", Types.BIGINT},
 		{"electronicsCount", Types.INTEGER},
 		{"electronicsInStock", Types.BOOLEAN},
 		{"electronicsArchive", Types.BOOLEAN},
-		{"electronicsDescription", Types.VARCHAR},
-		{"electroTypeId", Types.BIGINT}
+		{"electronicsDescription", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -93,6 +95,7 @@ public class ElectronicsModelImpl
 
 	static {
 		TABLE_COLUMNS_MAP.put("mvccVersion", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("electronicsId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -101,16 +104,16 @@ public class ElectronicsModelImpl
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("electronicsName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("electroTypeId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("electronicsPrice", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("electronicsCount", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("electronicsInStock", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("electronicsArchive", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("electronicsDescription", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("electroTypeId", Types.BIGINT);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table ES_Electronics (mvccVersion LONG default 0 not null,electronicsId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,electronicsName VARCHAR(75) null,electronicsPrice LONG,electronicsCount INTEGER,electronicsInStock BOOLEAN,electronicsArchive BOOLEAN,electronicsDescription VARCHAR(75) null,electroTypeId LONG)";
+		"create table ES_Electronics (mvccVersion LONG default 0 not null,uuid_ VARCHAR(75) null,electronicsId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,electronicsName VARCHAR(150) null,electroTypeId LONG,electronicsPrice LONG,electronicsCount INTEGER,electronicsInStock BOOLEAN,electronicsArchive BOOLEAN,electronicsDescription TEXT null)";
 
 	public static final String TABLE_SQL_DROP = "drop table ES_Electronics";
 
@@ -130,14 +133,26 @@ public class ElectronicsModelImpl
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long GROUPID_COLUMN_BITMASK = 2L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long UUID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long ELECTRONICSNAME_COLUMN_BITMASK = 2L;
+	public static final long ELECTRONICSNAME_COLUMN_BITMASK = 8L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
@@ -169,6 +184,7 @@ public class ElectronicsModelImpl
 		Electronics model = new ElectronicsImpl();
 
 		model.setMvccVersion(soapModel.getMvccVersion());
+		model.setUuid(soapModel.getUuid());
 		model.setElectronicsId(soapModel.getElectronicsId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -177,12 +193,12 @@ public class ElectronicsModelImpl
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setElectronicsName(soapModel.getElectronicsName());
+		model.setElectroTypeId(soapModel.getElectroTypeId());
 		model.setElectronicsPrice(soapModel.getElectronicsPrice());
 		model.setElectronicsCount(soapModel.getElectronicsCount());
 		model.setElectronicsInStock(soapModel.getElectronicsInStock());
 		model.setElectronicsArchive(soapModel.isElectronicsArchive());
 		model.setElectronicsDescription(soapModel.getElectronicsDescription());
-		model.setElectroTypeId(soapModel.getElectroTypeId());
 
 		return model;
 	}
@@ -339,6 +355,9 @@ public class ElectronicsModelImpl
 		attributeSetterBiConsumers.put(
 			"mvccVersion",
 			(BiConsumer<Electronics, Long>)Electronics::setMvccVersion);
+		attributeGetterFunctions.put("uuid", Electronics::getUuid);
+		attributeSetterBiConsumers.put(
+			"uuid", (BiConsumer<Electronics, String>)Electronics::setUuid);
 		attributeGetterFunctions.put(
 			"electronicsId", Electronics::getElectronicsId);
 		attributeSetterBiConsumers.put(
@@ -373,6 +392,11 @@ public class ElectronicsModelImpl
 			"electronicsName",
 			(BiConsumer<Electronics, String>)Electronics::setElectronicsName);
 		attributeGetterFunctions.put(
+			"electroTypeId", Electronics::getElectroTypeId);
+		attributeSetterBiConsumers.put(
+			"electroTypeId",
+			(BiConsumer<Electronics, Long>)Electronics::setElectroTypeId);
+		attributeGetterFunctions.put(
 			"electronicsPrice", Electronics::getElectronicsPrice);
 		attributeSetterBiConsumers.put(
 			"electronicsPrice",
@@ -400,11 +424,6 @@ public class ElectronicsModelImpl
 			"electronicsDescription",
 			(BiConsumer<Electronics, String>)
 				Electronics::setElectronicsDescription);
-		attributeGetterFunctions.put(
-			"electroTypeId", Electronics::getElectroTypeId);
-		attributeSetterBiConsumers.put(
-			"electroTypeId",
-			(BiConsumer<Electronics, Long>)Electronics::setElectroTypeId);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -425,6 +444,35 @@ public class ElectronicsModelImpl
 		}
 
 		_mvccVersion = mvccVersion;
+	}
+
+	@JSON
+	@Override
+	public String getUuid() {
+		if (_uuid == null) {
+			return "";
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	@Override
+	public void setUuid(String uuid) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_uuid = uuid;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public String getOriginalUuid() {
+		return getColumnOriginalValue("uuid_");
 	}
 
 	@JSON
@@ -479,6 +527,16 @@ public class ElectronicsModelImpl
 		}
 
 		_companyId = companyId;
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalCompanyId() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("companyId"));
 	}
 
 	@JSON
@@ -590,6 +648,21 @@ public class ElectronicsModelImpl
 
 	@JSON
 	@Override
+	public long getElectroTypeId() {
+		return _electroTypeId;
+	}
+
+	@Override
+	public void setElectroTypeId(long electroTypeId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_electroTypeId = electroTypeId;
+	}
+
+	@JSON
+	@Override
 	public long getElectronicsPrice() {
 		return _electronicsPrice;
 	}
@@ -674,19 +747,10 @@ public class ElectronicsModelImpl
 		_electronicsDescription = electronicsDescription;
 	}
 
-	@JSON
 	@Override
-	public long getElectroTypeId() {
-		return _electroTypeId;
-	}
-
-	@Override
-	public void setElectroTypeId(long electroTypeId) {
-		if (_columnOriginalValues == Collections.EMPTY_MAP) {
-			_setColumnOriginalValues();
-		}
-
-		_electroTypeId = electroTypeId;
+	public StagedModelType getStagedModelType() {
+		return new StagedModelType(
+			PortalUtil.getClassNameId(Electronics.class.getName()));
 	}
 
 	public long getColumnBitmask() {
@@ -746,6 +810,7 @@ public class ElectronicsModelImpl
 		ElectronicsImpl electronicsImpl = new ElectronicsImpl();
 
 		electronicsImpl.setMvccVersion(getMvccVersion());
+		electronicsImpl.setUuid(getUuid());
 		electronicsImpl.setElectronicsId(getElectronicsId());
 		electronicsImpl.setGroupId(getGroupId());
 		electronicsImpl.setCompanyId(getCompanyId());
@@ -754,12 +819,12 @@ public class ElectronicsModelImpl
 		electronicsImpl.setCreateDate(getCreateDate());
 		electronicsImpl.setModifiedDate(getModifiedDate());
 		electronicsImpl.setElectronicsName(getElectronicsName());
+		electronicsImpl.setElectroTypeId(getElectroTypeId());
 		electronicsImpl.setElectronicsPrice(getElectronicsPrice());
 		electronicsImpl.setElectronicsCount(getElectronicsCount());
 		electronicsImpl.setElectronicsInStock(getElectronicsInStock());
 		electronicsImpl.setElectronicsArchive(isElectronicsArchive());
 		electronicsImpl.setElectronicsDescription(getElectronicsDescription());
-		electronicsImpl.setElectroTypeId(getElectroTypeId());
 
 		electronicsImpl.resetOriginalValues();
 
@@ -841,6 +906,14 @@ public class ElectronicsModelImpl
 
 		electronicsCacheModel.mvccVersion = getMvccVersion();
 
+		electronicsCacheModel.uuid = getUuid();
+
+		String uuid = electronicsCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
+			electronicsCacheModel.uuid = null;
+		}
+
 		electronicsCacheModel.electronicsId = getElectronicsId();
 
 		electronicsCacheModel.groupId = getGroupId();
@@ -883,6 +956,8 @@ public class ElectronicsModelImpl
 			electronicsCacheModel.electronicsName = null;
 		}
 
+		electronicsCacheModel.electroTypeId = getElectroTypeId();
+
 		electronicsCacheModel.electronicsPrice = getElectronicsPrice();
 
 		electronicsCacheModel.electronicsCount = getElectronicsCount();
@@ -906,8 +981,6 @@ public class ElectronicsModelImpl
 
 			electronicsCacheModel.electronicsDescription = null;
 		}
-
-		electronicsCacheModel.electroTypeId = getElectroTypeId();
 
 		return electronicsCacheModel;
 	}
@@ -1000,6 +1073,7 @@ public class ElectronicsModelImpl
 	}
 
 	private long _mvccVersion;
+	private String _uuid;
 	private long _electronicsId;
 	private long _groupId;
 	private long _companyId;
@@ -1009,14 +1083,16 @@ public class ElectronicsModelImpl
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private String _electronicsName;
+	private long _electroTypeId;
 	private long _electronicsPrice;
 	private int _electronicsCount;
 	private Boolean _electronicsInStock;
 	private boolean _electronicsArchive;
 	private String _electronicsDescription;
-	private long _electroTypeId;
 
 	public <T> T getColumnValue(String columnName) {
+		columnName = _attributeNames.getOrDefault(columnName, columnName);
+
 		Function<Electronics, Object> function = _attributeGetterFunctions.get(
 			columnName);
 
@@ -1044,6 +1120,7 @@ public class ElectronicsModelImpl
 		_columnOriginalValues = new HashMap<String, Object>();
 
 		_columnOriginalValues.put("mvccVersion", _mvccVersion);
+		_columnOriginalValues.put("uuid_", _uuid);
 		_columnOriginalValues.put("electronicsId", _electronicsId);
 		_columnOriginalValues.put("groupId", _groupId);
 		_columnOriginalValues.put("companyId", _companyId);
@@ -1052,13 +1129,23 @@ public class ElectronicsModelImpl
 		_columnOriginalValues.put("createDate", _createDate);
 		_columnOriginalValues.put("modifiedDate", _modifiedDate);
 		_columnOriginalValues.put("electronicsName", _electronicsName);
+		_columnOriginalValues.put("electroTypeId", _electroTypeId);
 		_columnOriginalValues.put("electronicsPrice", _electronicsPrice);
 		_columnOriginalValues.put("electronicsCount", _electronicsCount);
 		_columnOriginalValues.put("electronicsInStock", _electronicsInStock);
 		_columnOriginalValues.put("electronicsArchive", _electronicsArchive);
 		_columnOriginalValues.put(
 			"electronicsDescription", _electronicsDescription);
-		_columnOriginalValues.put("electroTypeId", _electroTypeId);
+	}
+
+	private static final Map<String, String> _attributeNames;
+
+	static {
+		Map<String, String> attributeNames = new HashMap<>();
+
+		attributeNames.put("uuid_", "uuid");
+
+		_attributeNames = Collections.unmodifiableMap(attributeNames);
 	}
 
 	private transient Map<String, Object> _columnOriginalValues;
@@ -1074,33 +1161,35 @@ public class ElectronicsModelImpl
 
 		columnBitmasks.put("mvccVersion", 1L);
 
-		columnBitmasks.put("electronicsId", 2L);
+		columnBitmasks.put("uuid_", 2L);
 
-		columnBitmasks.put("groupId", 4L);
+		columnBitmasks.put("electronicsId", 4L);
 
-		columnBitmasks.put("companyId", 8L);
+		columnBitmasks.put("groupId", 8L);
 
-		columnBitmasks.put("userId", 16L);
+		columnBitmasks.put("companyId", 16L);
 
-		columnBitmasks.put("userName", 32L);
+		columnBitmasks.put("userId", 32L);
 
-		columnBitmasks.put("createDate", 64L);
+		columnBitmasks.put("userName", 64L);
 
-		columnBitmasks.put("modifiedDate", 128L);
+		columnBitmasks.put("createDate", 128L);
 
-		columnBitmasks.put("electronicsName", 256L);
+		columnBitmasks.put("modifiedDate", 256L);
 
-		columnBitmasks.put("electronicsPrice", 512L);
+		columnBitmasks.put("electronicsName", 512L);
 
-		columnBitmasks.put("electronicsCount", 1024L);
+		columnBitmasks.put("electroTypeId", 1024L);
 
-		columnBitmasks.put("electronicsInStock", 2048L);
+		columnBitmasks.put("electronicsPrice", 2048L);
 
-		columnBitmasks.put("electronicsArchive", 4096L);
+		columnBitmasks.put("electronicsCount", 4096L);
 
-		columnBitmasks.put("electronicsDescription", 8192L);
+		columnBitmasks.put("electronicsInStock", 8192L);
 
-		columnBitmasks.put("electroTypeId", 16384L);
+		columnBitmasks.put("electronicsArchive", 16384L);
+
+		columnBitmasks.put("electronicsDescription", 32768L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

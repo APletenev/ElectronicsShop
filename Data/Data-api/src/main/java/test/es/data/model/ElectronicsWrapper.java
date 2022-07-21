@@ -14,6 +14,7 @@
 
 package test.es.data.model;
 
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -43,6 +44,7 @@ public class ElectronicsWrapper
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("mvccVersion", getMvccVersion());
+		attributes.put("uuid", getUuid());
 		attributes.put("electronicsId", getElectronicsId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -51,12 +53,12 @@ public class ElectronicsWrapper
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("electronicsName", getElectronicsName());
+		attributes.put("electroTypeId", getElectroTypeId());
 		attributes.put("electronicsPrice", getElectronicsPrice());
 		attributes.put("electronicsCount", getElectronicsCount());
 		attributes.put("electronicsInStock", getElectronicsInStock());
 		attributes.put("electronicsArchive", isElectronicsArchive());
 		attributes.put("electronicsDescription", getElectronicsDescription());
-		attributes.put("electroTypeId", getElectroTypeId());
 
 		return attributes;
 	}
@@ -67,6 +69,12 @@ public class ElectronicsWrapper
 
 		if (mvccVersion != null) {
 			setMvccVersion(mvccVersion);
+		}
+
+		String uuid = (String)attributes.get("uuid");
+
+		if (uuid != null) {
+			setUuid(uuid);
 		}
 
 		Long electronicsId = (Long)attributes.get("electronicsId");
@@ -117,6 +125,12 @@ public class ElectronicsWrapper
 			setElectronicsName(electronicsName);
 		}
 
+		Long electroTypeId = (Long)attributes.get("electroTypeId");
+
+		if (electroTypeId != null) {
+			setElectroTypeId(electroTypeId);
+		}
+
 		Long electronicsPrice = (Long)attributes.get("electronicsPrice");
 
 		if (electronicsPrice != null) {
@@ -148,12 +162,6 @@ public class ElectronicsWrapper
 
 		if (electronicsDescription != null) {
 			setElectronicsDescription(electronicsDescription);
-		}
-
-		Long electroTypeId = (Long)attributes.get("electroTypeId");
-
-		if (electroTypeId != null) {
-			setElectroTypeId(electroTypeId);
 		}
 	}
 
@@ -325,6 +333,16 @@ public class ElectronicsWrapper
 	@Override
 	public String getUserUuid() {
 		return model.getUserUuid();
+	}
+
+	/**
+	 * Returns the uuid of this electronics.
+	 *
+	 * @return the uuid of this electronics
+	 */
+	@Override
+	public String getUuid() {
+		return model.getUuid();
 	}
 
 	/**
@@ -510,6 +528,21 @@ public class ElectronicsWrapper
 	@Override
 	public void setUserUuid(String userUuid) {
 		model.setUserUuid(userUuid);
+	}
+
+	/**
+	 * Sets the uuid of this electronics.
+	 *
+	 * @param uuid the uuid of this electronics
+	 */
+	@Override
+	public void setUuid(String uuid) {
+		model.setUuid(uuid);
+	}
+
+	@Override
+	public StagedModelType getStagedModelType() {
+		return model.getStagedModelType();
 	}
 
 	@Override

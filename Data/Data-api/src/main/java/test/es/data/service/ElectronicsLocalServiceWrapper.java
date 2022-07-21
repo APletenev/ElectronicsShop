@@ -50,6 +50,21 @@ public class ElectronicsLocalServiceWrapper
 		return _electronicsLocalService.addElectronics(electronics);
 	}
 
+	@Override
+	public test.es.data.model.Electronics addElectronics(
+			long userId, String electronicsName, long electronicsPrice,
+			int electronicsCount, boolean electronicsInStock,
+			boolean electronicsArchive, String electronicsDescription,
+			long electroTypeId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _electronicsLocalService.addElectronics(
+			userId, electronicsName, electronicsPrice, electronicsCount,
+			electronicsInStock, electronicsArchive, electronicsDescription,
+			electroTypeId, serviceContext);
+	}
+
 	/**
 	 * Creates a new electronics with the primary key. Does not add the electronics to the database.
 	 *
@@ -83,10 +98,12 @@ public class ElectronicsLocalServiceWrapper
 	 *
 	 * @param electronics the electronics
 	 * @return the electronics that was removed
+	 * @throws PortalException
 	 */
 	@Override
 	public test.es.data.model.Electronics deleteElectronics(
-		test.es.data.model.Electronics electronics) {
+			test.es.data.model.Electronics electronics)
+		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _electronicsLocalService.deleteElectronics(electronics);
 	}
@@ -215,6 +232,21 @@ public class ElectronicsLocalServiceWrapper
 		return _electronicsLocalService.fetchElectronics(electronicsId);
 	}
 
+	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics, or <code>null</code> if a matching electronics could not be found
+	 */
+	@Override
+	public test.es.data.model.Electronics fetchElectronicsByUuidAndGroupId(
+		String uuid, long groupId) {
+
+		return _electronicsLocalService.fetchElectronicsByUuidAndGroupId(
+			uuid, groupId);
+	}
+
 	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
@@ -237,6 +269,28 @@ public class ElectronicsLocalServiceWrapper
 	}
 
 	/**
+	 * Returns the electronics matching the UUID and group.
+	 *
+	 * @param uuid the electronics's UUID
+	 * @param groupId the primary key of the group
+	 * @return the matching electronics
+	 * @throws PortalException if a matching electronics could not be found
+	 */
+	@Override
+	public test.es.data.model.Electronics getElectronicsByUuidAndGroupId(
+			String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _electronicsLocalService.getElectronicsByUuidAndGroupId(
+			uuid, groupId);
+	}
+
+	@Override
+	public int getElectronicsCount(long groupId) {
+		return _electronicsLocalService.getElectronicsCount(groupId);
+	}
+
+	/**
 	 * Returns a range of all the electronicses.
 	 *
 	 * <p>
@@ -255,6 +309,42 @@ public class ElectronicsLocalServiceWrapper
 	}
 
 	/**
+	 * Returns all the electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @return the matching electronicses, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<test.es.data.model.Electronics>
+		getElectronicsesByUuidAndCompanyId(String uuid, long companyId) {
+
+		return _electronicsLocalService.getElectronicsesByUuidAndCompanyId(
+			uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of electronicses matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the electronicses
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of electronicses
+	 * @param end the upper bound of the range of electronicses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching electronicses, or an empty list if no matches were found
+	 */
+	@Override
+	public java.util.List<test.es.data.model.Electronics>
+		getElectronicsesByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<test.es.data.model.Electronics> orderByComparator) {
+
+		return _electronicsLocalService.getElectronicsesByUuidAndCompanyId(
+			uuid, companyId, start, end, orderByComparator);
+	}
+
+	/**
 	 * Returns the number of electronicses.
 	 *
 	 * @return the number of electronicses
@@ -262,6 +352,40 @@ public class ElectronicsLocalServiceWrapper
 	@Override
 	public int getElectronicsesCount() {
 		return _electronicsLocalService.getElectronicsesCount();
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.Electronics> getElectronicss(
+		long groupId) {
+
+		return _electronicsLocalService.getElectronicss(groupId);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.Electronics> getElectronicss(
+		long groupId, int start, int end) {
+
+		return _electronicsLocalService.getElectronicss(groupId, start, end);
+	}
+
+	@Override
+	public java.util.List<test.es.data.model.Electronics> getElectronicss(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<test.es.data.model.Electronics> obc) {
+
+		return _electronicsLocalService.getElectronicss(
+			groupId, start, end, obc);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
+		getExportActionableDynamicQuery(
+			com.liferay.exportimport.kernel.lar.PortletDataContext
+				portletDataContext) {
+
+		return _electronicsLocalService.getExportActionableDynamicQuery(
+			portletDataContext);
 	}
 
 	@Override
@@ -307,6 +431,22 @@ public class ElectronicsLocalServiceWrapper
 		test.es.data.model.Electronics electronics) {
 
 		return _electronicsLocalService.updateElectronics(electronics);
+	}
+
+	@Override
+	public test.es.data.model.Electronics updateElectronics(
+			long userId, long electronicsID, String electronicsName,
+			long electronicsPrice, int electronicsCount,
+			boolean electronicsInStock, boolean electronicsArchive,
+			String electronicsDescription, long electroTypeId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			   com.liferay.portal.kernel.exception.SystemException {
+
+		return _electronicsLocalService.updateElectronics(
+			userId, electronicsID, electronicsName, electronicsPrice,
+			electronicsCount, electronicsInStock, electronicsArchive,
+			electronicsDescription, electroTypeId, serviceContext);
 	}
 
 	@Override

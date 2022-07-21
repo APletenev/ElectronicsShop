@@ -110,7 +110,7 @@
         </finder>
         
 	</entity>
-		<entity name="Electronics" local-service="true">
+		<entity name="Electronics" local-service="true" uuid="true">
 
 			<!-- PK fields -->
 
@@ -131,12 +131,13 @@
 			<!-- Other fields -->
 			
         <column name="electronicsName" type="String"></column>
+        <column name="electroTypeId" type="long"></column>
         <column name="electronicsPrice" type="long"></column>
         <column name="electronicsCount" type="int"></column>
         <column name="electronicsInStock" type="Boolean"></column>
         <column name="electronicsArchive" type="boolean"></column>
         <column name="electronicsDescription" type="String"></column>
-        <column name="electroTypeId" type="long"></column>
+        
         <order by="asc">
             <order-column name="electronicsName" order-by="asc"></order-column>
         </order>
@@ -152,5 +153,11 @@
         <exception>ElectroTypeName</exception>
         <exception>PositionTypeName</exception>
         <exception>PurchaseTypeName</exception>
+        <exception>ElectronicsName</exception>
+        <exception>ElectronicsPrice</exception>
+        <exception>ElectronicsCount</exception>
+        <exception>ElectronicsInStock</exception>
+        <exception>ElectronicsArchive</exception>
+        <exception>ElectronicsDescription</exception>
     </exceptions>
 </service-builder>
