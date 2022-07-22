@@ -391,7 +391,7 @@ public class ElectronicsLocalServiceUtil {
 	}
 
 	public static Electronics updateElectronics(
-			long userId, long electronicsID, String electronicsName,
+			long userId, long electronicsId, String electronicsName,
 			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
 			String electronicsDescription,
@@ -399,7 +399,7 @@ public class ElectronicsLocalServiceUtil {
 		throws PortalException, SystemException {
 
 		return getService().updateElectronics(
-			userId, electronicsID, electronicsName, electroTypeId,
+			userId, electronicsId, electronicsName, electroTypeId,
 			electronicsPrice, electronicsCount, electronicsInStock,
 			electronicsArchive, electronicsDescription, serviceContext);
 	}

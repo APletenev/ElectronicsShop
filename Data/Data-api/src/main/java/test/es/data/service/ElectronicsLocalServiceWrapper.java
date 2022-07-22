@@ -435,7 +435,7 @@ public class ElectronicsLocalServiceWrapper
 
 	@Override
 	public test.es.data.model.Electronics updateElectronics(
-			long userId, long electronicsID, String electronicsName,
+			long userId, long electronicsId, String electronicsName,
 			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
 			String electronicsDescription,
@@ -444,7 +444,7 @@ public class ElectronicsLocalServiceWrapper
 			   com.liferay.portal.kernel.exception.SystemException {
 
 		return _electronicsLocalService.updateElectronics(
-			userId, electronicsID, electronicsName, electroTypeId,
+			userId, electronicsId, electronicsName, electroTypeId,
 			electronicsPrice, electronicsCount, electronicsInStock,
 			electronicsArchive, electronicsDescription, serviceContext);
 	}

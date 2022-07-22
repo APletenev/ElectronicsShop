@@ -33,6 +33,7 @@ import test.es.data.exception.ElectronicsNameException;
 import test.es.data.exception.ElectronicsPriceException;
 import test.es.data.model.Electronics;
 import test.es.data.service.base.ElectronicsLocalServiceBaseImpl;
+import test.es.data.service.base.ElectroTypeLocalServiceBaseImpl;
 
 
 /**
@@ -95,7 +96,7 @@ public class ElectronicsLocalServiceImpl
 	
 	public Electronics updateElectronics(
 			long userId, 
-			long electronicsID,
+			long electronicsId,
 			String electronicsName, 
 			long electroTypeId, //FK
 			long electronicsPrice, 
@@ -111,7 +112,7 @@ public class ElectronicsLocalServiceImpl
 		validate(electronicsName, electronicsPrice, electronicsCount, electronicsDescription);
 
 		Electronics entry =
-			electronicsPersistence.findByPrimaryKey(electronicsID);
+			electronicsPersistence.findByPrimaryKey(electronicsId);
 
 		User user = userLocalService.getUserById(userId);
 
@@ -144,10 +145,10 @@ public class ElectronicsLocalServiceImpl
 			return entry;
 		}
 
-	public Electronics deleteElectronics(long electronicsID) throws PortalException {
+	public Electronics deleteElectronics(long electronicsId) throws PortalException {
 
 			Electronics entry =
-				electronicsPersistence.findByPrimaryKey(electronicsID);
+				electronicsPersistence.findByPrimaryKey(electronicsId);
 
 			return deleteElectronics(entry);
 	}
@@ -187,9 +188,10 @@ public class ElectronicsLocalServiceImpl
 		if (electronicsCount<0) {
 			throw new ElectronicsCountException();
 		}
-		if (Validator.isNull(electronicsDescription)) {
+		if (Validator. isNull(electronicsDescription)) {
 			throw new ElectronicsDescriptionException();
 		}
+	
 		
 	}
 	

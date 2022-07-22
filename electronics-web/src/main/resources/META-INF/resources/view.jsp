@@ -26,7 +26,7 @@ long ElectroTypeId = Long.valueOf((Long) renderRequest
     className="Electronics" modelVar="entry">
 
     <liferay-ui:search-container-column-text property="electronicsName" name="Name" />
-    
+    <liferay-ui:search-container-column-text property="electroTypeId" name="Name" />
 	<liferay-ui:search-container-column-text property="electronicsPrice" name="Price" />
 	<liferay-ui:search-container-column-text property="electronicsCount" name="Count" />
 	<liferay-ui:search-container-column-text property="electronicsInStock" name="InStock" />

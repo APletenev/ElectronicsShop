@@ -340,7 +340,7 @@ public interface ElectronicsLocalService
 	public Electronics updateElectronics(Electronics electronics);
 
 	public Electronics updateElectronics(
-			long userId, long electronicsID, String electronicsName,
+			long userId, long electronicsId, String electronicsName,
 			long electroTypeId, long electronicsPrice, int electronicsCount,
 			boolean electronicsInStock, boolean electronicsArchive,
 			String electronicsDescription, ServiceContext serviceContext)

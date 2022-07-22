@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import test.es.data.electronics.portlet.constants.ElectronicsPortletKeys;
 import test.es.data.model.ElectroType;
 import test.es.data.model.Electronics;
-import test.es.data.electronics.portlet.portlet.ElectronicsPortlet;
 import test.es.data.service.ElectroTypeLocalService;
 import test.es.data.service.ElectronicsLocalService;
 
@@ -129,7 +128,7 @@ public class ElectronicsPortlet extends MVCPortlet {
 
 	        if (electroTypes.isEmpty()) {
 	            ElectroType electroType = _electroTypeLocalService.addElectroType(
-	                serviceContext.getUserId(), "Main", serviceContext);
+	                serviceContext.getUserId(), "none", serviceContext);
 
 	            electroTypeId = electroType.getElectroTypeId();
 	        }
@@ -145,6 +144,22 @@ public class ElectronicsPortlet extends MVCPortlet {
 	    }
 
 	    super.render(renderRequest, renderResponse);
-	}	
+	} 	
+	
+	@Override
+	protected void doDispatch(RenderRequest request, RenderResponse response) throws IOException, PortletException {
+		try {
+	        ServiceContext serviceContext = ServiceContextFactory.getInstance(
+	            ElectroType.class.getName(), request);
+
+	        long groupId = serviceContext.getScopeGroupId();
+		
+		request.setAttribute("listElectroTypes", _electroTypeLocalService.getElectroTypes(serviceContext.getScopeGroupId()));
+		}
+		catch (Exception e) {
+	        throw new PortletException(e);
+	    }
+	    super.doDispatch(request, response);
+	}
 
 }

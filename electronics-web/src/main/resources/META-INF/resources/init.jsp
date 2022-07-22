@@ -17,7 +17,11 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 
 <%@ page import="test.es.data.model.Electronics" %>
+<%@ page import="test.es.data.model.ElectroType" %>
 <%@ page import="test.es.data.service.ElectronicsLocalServiceUtil" %>
+<%@ page import="test.es.data.service.ElectroTypeLocalServiceUtil" %>
+
+
 
 
 <liferay-theme:defineObjects />

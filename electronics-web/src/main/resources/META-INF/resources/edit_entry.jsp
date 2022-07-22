@@ -7,8 +7,13 @@
 long entryId = ParamUtil.getLong(renderRequest, "electronicsId");
 
 Electronics entry = null;
+long etId = 0; //Will trigger exception in case of bug in form validation
+String etName = "";
 if (entryId > 0) { //Editing
   entry = ElectronicsLocalServiceUtil.getElectronics(entryId);
+  etId = entry.getElectroTypeId();
+  ElectroType et = ElectroTypeLocalServiceUtil.getElectroType(etId);
+  etName = et.getElectroTypeName();
 }
 
 %>
@@ -28,6 +33,15 @@ if (entryId > 0) { //Editing
 		<aui:input name="electronicsName"  label="Name" >
 		<aui:validator name="required" > </aui:validator>
 		</aui:input>
+		
+		<aui:select name="electroTypeId" id="electroTypeId">
+		<aui:option value="<%= etId %>" selected="true"><%= etName %></aui:option>
+		<c:forEach var="electroType" items="${listElectroTypes}">
+    	<aui:option value="${electroType.getElectroTypeId()}">${electroType.getElectroTypeName()}</aui:option>
+		</c:forEach>
+		<aui:validator name="required" />
+		<aui:validator name="minLength">2</aui:validator>
+		</aui:select>
 		
 		<aui:input name="electronicsPrice"  label="Price" >
 		<aui:validator name="required" /> 
